@@ -10,7 +10,7 @@ import android.webkit.WebViewClient
 import android.widget.*
 import com.example.spinnertutorial.lists.Lists
 
-lateinit var reservationTime: String
+lateinit var selectedTime: String
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,12 +32,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkTime() {
         //https://www.youtube.com/watch?v=0wZwLfmVTvU&ab_channel=CodeWithMazn
-        var selectedTime: Int = 1
+
         val reservationTimeBar = findViewById<SeekBar>(R.id.SB_time_bar)
         val selectedTimeNumber = findViewById<TextView>(R.id.tv_reservation_time_number)
         reservationTimeBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                selectedTime = reservationTimeBar.progress * 15
+                selectedTime = (reservationTimeBar.progress * 15).toString()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -228,7 +228,7 @@ class MainActivity : AppCompatActivity() {
 
                 Toast.makeText(
                     this,
-                    ("Creating reservation: ${selectedItems[0]}, ${selectedItems[1]}, ${selectedItems[2]}, ${selectedItems[3]}, ${selectedItems[4]}"),
+                    ("Creating reservation: ${selectedItems[0]}, ${selectedItems[1]}, ${selectedItems[2]}, ${selectedItems[3]}, ${selectedItems[4]}, $selectedTime"),
                     Toast.LENGTH_LONG
                 ).show()
             }
