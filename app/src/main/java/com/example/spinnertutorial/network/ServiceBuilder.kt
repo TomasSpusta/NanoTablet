@@ -10,14 +10,27 @@ We can set many properties like, converter factory for json parsing,
 base url, http client and many more configurations as required.
 Here is the simplest required form for our tasks.*/
 
-
-object ServiceBuilder {
+val baseURL = "https://booking-beta1.ceitec.cz/"
+val baseURL2 = "https://crm.api.ceitec.cz/"
+object BookingServiceBuilder {
 
     private val client = OkHttpClient.Builder().build()
-
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://crm.api.ceitec.cz/")
+        .baseUrl(baseURL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(client)
+        .build()
 
+    fun <T> buildService(service: Class<T>): T{
+        return retrofit.create(service)
+    }
+}
+
+object CRMServiceBuilder {
+
+    private val client = OkHttpClient.Builder().build()
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(baseURL2)
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
