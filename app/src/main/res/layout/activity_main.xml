@@ -24,7 +24,9 @@
         <Spinner
             android:id="@+id/spin_equipment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:contentDescription="Select equipment"
+
             />
 
         <TextView
@@ -36,7 +38,8 @@
         <Spinner
             android:id="@+id/spin_operations"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:contentDescription="Select equipment"/>
 
         <TextView
             android:id="@+id/tv_layer"
@@ -47,7 +50,8 @@
         <Spinner
             android:id="@+id/spin_additional_layer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:contentDescription="Select equipment"/>
 
         <TextView
             android:id="@+id/tv_sample_material"
@@ -59,7 +63,8 @@
             android:id="@+id/spin_sample_material"
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:contentDescription="Select equipment" />
 
         <TextView
             android:id="@+id/tv_sample_size"
@@ -71,7 +76,8 @@
             android:id="@+id/spin_sample_size"
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:contentDescription="Select equipment" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -103,7 +109,7 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
 
             android:max="10"
             android:progress="1" />
@@ -112,8 +118,15 @@
             android:id="@+id/btn_reservation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:text="Make reservation" />
+
+        <Button
+            android:id="@+id/btn_log_off"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Log off" />
 
 
 

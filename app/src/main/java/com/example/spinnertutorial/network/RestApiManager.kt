@@ -13,42 +13,51 @@ If you feel you can rename the class as your own like with RestApiManager or Api
 
 class RestApiManager {
 
-    fun getUserData (requestModel: RequestModel, onResult: (ResponseModelList?) -> Unit){
+    fun CRMRequest(requestModel: CRMReqM, onResult: (CRMResMList?) -> Unit) {
 
-        val retrofit = ServiceBuilder.buildService(ApiInterface::class.java)
-        retrofit.sendRequest(requestModel).enqueue(
+        val retrofit = CRMServiceBuilder.buildService(ApiInterface::class.java)
+        retrofit.sendCRMReq(requestModel).enqueue(
 
-            object : Callback <ResponseModelList> {
+            object : Callback<CRMResMList> {
 
-                override fun onFailure(call: Call<ResponseModelList>, t: Throwable) {
+                override fun onFailure(call: Call<CRMResMList>, t: Throwable) {
                     onResult(null)
-                    println("Problemek onFailure funkce")
+                    println("Problemek CRM onFailure funkce")
                 }
 
-                override fun onResponse(call: Call<ResponseModelList>, response: Response<ResponseModelList>) {
+                override fun onResponse(call: Call<CRMResMList>, response: Response<CRMResMList>) {
                     val cRMResponse = response.body()
                     onResult(cRMResponse)
-/*
-                    //Log.d("Response","${response.code()}")
-                   // Log.d("Response","${response.body()?.size}")
-                    //Log.d("Response","${response.body()}")
-                    if (response.body()?.size != 0) {
-                        Log.d("Response_","${response.body()?.get(0)?.userFirstName}")
-                        //val odpoved = response.body()
-                        //val userID = response.body()?.get(0)?.userID
-                        //val userFirstName = response.body()?.get(0)?.userFirstName
-                        //onResult(odpoved)
 
-
-                    }else{
-                        Log.d("Response_","User is not in database")
-                    }
-
- */
                 }
             }
         )
     }
 
+    fun BookingRequest(requestModel: BookingReqM, onResult: (BookingResM?) -> Unit) {
+        val retrofit = BookingServiceBuilder.buildService(ApiInterface::class.java)
+        retrofit.sendBookingReq(requestModel).enqueue(
 
+            object : Callback<BookingResM> {
+
+                override fun onFailure(call: Call<BookingResM>, t: Throwable) {
+                    onResult(null)
+                    Log.d("_Response",onResult.toString())
+                    println("Problemek Booking onFailure funkce")
+                }
+
+                override fun onResponse(call: Call<BookingResM>, response: Response<BookingResM>) {
+                    val bookingResponse = response.body()
+                    onResult(bookingResponse)
+
+
+                    Log.d("_Response","${response.code()}")
+                    Log.d("_Response","${response.body()}")
+
+                }
+
+
+            }
+        )
+    }
 }
