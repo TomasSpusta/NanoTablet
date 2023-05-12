@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Nano RFID</string>
+    <string name="instruments">Instruments</string>
+    <string name="operations">Operations</string>
+    <string name="sample_materials">Sample materials</string>
+    <string name="additional_layers">Additional layers</string>
+    <string name="sample_sizes">Sample Sizes</string>
 </resources>

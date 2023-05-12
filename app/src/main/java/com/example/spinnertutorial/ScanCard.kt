@@ -1,11 +1,13 @@
 package com.example.spinnertutorial
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import android.webkit.WebView
 import android.widget.EditText
 import android.widget.TextView
 import com.example.spinnertutorial.network.CRMReqM
@@ -21,9 +23,13 @@ class ScanCard : AppCompatActivity() {
     var cardID: String = ""
     lateinit var showCardID: TextView
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_card)
+
+        val myWeb = findViewById<WebView>(R.id.wv_booking)
+        setupWebView(myWeb)
 
         showCardID = findViewById(R.id.tv_card_info)
         myEditText = findViewById(R.id.et_cardID)
