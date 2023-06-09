@@ -1,61 +1,158 @@
 package com.example.spinnertutorial
 
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.text.Layout
 import android.view.View
-import android.webkit.WebView
 import android.widget.*
 import androidx.annotation.RequiresApi
-import com.example.spinnertutorial.lists.Lists
-import com.example.spinnertutorial.network.CRMResM
-import kotlin.properties.Delegates
+import androidx.fragment.app.Fragment
+import com.example.spinnertutorial.databinding.ActivityMainBinding
+import com.example.spinnertutorial.fragments.FragmentInterface
+import com.example.spinnertutorial.fragments.InstrumentsFrag
+import com.example.spinnertutorial.fragments.LayersFrag
+import com.example.spinnertutorial.fragments.MaterialsFrag
+import com.example.spinnertutorial.fragments.OperationsFrag
+import com.example.spinnertutorial.fragments.SizesFrag
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FragmentInterface {
+
+    //binding of activity_main.xml
+    private lateinit var binding: ActivityMainBinding
+    lateinit var map: MutableMap<String, String>
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //inflate binding of activity_main.xml
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        map = mutableMapOf(
+            "instrument" to "",
+            "operations" to "",
+            "material" to "",
+            "layer" to "",
+            "size" to ""
+        )
 
-        val myWeb = findViewById<WebView>(R.id.web_view)
+        //set onClickListeners for buttons to replace fragments
+        binding.btnInstruments.setOnClickListener {
+            replaceFragment(InstrumentsFrag())
+        }
+        binding.btnOperations.setOnClickListener {
+            replaceFragment(OperationsFrag())
+        }
+        binding.btnMaterials.setOnClickListener {
+            replaceFragment(MaterialsFrag())
+        }
+        binding.btnLayers.setOnClickListener {
+            replaceFragment(LayersFrag())
+        }
+        binding.btnSizes.setOnClickListener {
+            replaceFragment(SizesFrag())
+        }
+
+
         // Web view will display web site of cf nano to see reservations
-        setupWebView(myWeb)
+        // setupWebView(myWeb)
 
         // Set up spinner for equip, operations...
-        setupSpinner()
+        // setupSpinner()
 
         // Checking the selected time of reservation
         // checkTime()
-
-
-    }
-
-    private fun checkTime() {
-        //https://www.youtube.com/watch?v=0wZwLfmVTvU&ab_channel=CodeWithMazn
-        var selectedTime: Int
-        val reservationTimeBar = findViewById<SeekBar>(R.id.SB_time_bar)
-        val selectedTimeNumber = findViewById<TextView>(R.id.tv_reservation_time_number)
-        reservationTimeBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                selectedTime = (reservationTimeBar.progress * 15)
-                selectedTimeNumber.text = "${selectedTime} minutes"
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                // selectedTimeNumber.text = "${selectedTime} minutes"
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-
-            }
-        })
+        //println (map.toString())
 
     }
 
+
+    /*
+        override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+            super.onSaveInstanceState(outState, outPersistentState)
+
+            outState.putInt("selectedInstrument",selectedInstrument)
+
+        }
+
+     */
+
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        // binding.textView5.text = "Selected instrument: ${map["instrument"]},\n" +
+        //       "Selected operations: ${map["operations"]}"
+        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.commit()
+
+    }
+
+    override fun transferInstrument(instrument: String) {
+
+        map["instrument"] = instrument
+
+    }
+
+    override fun transferOperations(operations: List<String>) {
+        map["operations"] = operations.toString()
+    }
+
+    override fun transferMaterial(material: String) {
+        // binding.textView6.text = material
+        map["material"] = material
+
+    }
+
+    override fun transferLayer(layer: String) {
+        map["layer"] = layer
+    }
+
+    override fun transferSize(size: String) {
+        map["size"] = size
+    }
+    /*
+        @SuppressLint("SetTextI18n")
+        override fun transferNames(name: String) {
+            reservationData.add(name)
+            map["Selected instrument"] = name
+
+            binding.textView6.text = "Selected instrument: " + map["Selected instrument"]
+        }
+
+     */
+}
+
+/*
+private fun checkTime() {
+    //https://www.youtube.com/watch?v=0wZwLfmVTvU&ab_channel=CodeWithMazn
+    var selectedTime: Int
+    val reservationTimeBar = findViewById<SeekBar>(R.id.SB_time_bar)
+    val selectedTimeNumber = findViewById<TextView>(R.id.tv_reservation_time_number)
+    reservationTimeBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+            selectedTime = (reservationTimeBar.progress * 15)
+            selectedTimeNumber.text = "${selectedTime} minutes"
+        }
+
+        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            // selectedTimeNumber.text = "${selectedTime} minutes"
+        }
+
+        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+        }
+    })
+
+}
+
+ */
+/*
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupSpinner() {
@@ -160,7 +257,7 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-
+/*
         //https://www.youtube.com/watch?v=0wZwLfmVTvU&ab_channel=CodeWithMazn
         var selectedTime: Int = 0
         val reservationTimeBar = findViewById<SeekBar>(R.id.SB_time_bar)
@@ -181,6 +278,8 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+
+ */
 
         val reservationButton: Button = findViewById(R.id.btn_reservation)
 
@@ -205,7 +304,7 @@ class MainActivity : AppCompatActivity() {
 
                 makeReservation(
                     context = this,
-                    reservationLength = selectedTime,
+                    reservationLength = 60,
                     equipment = listOf(selectedItems[0]),
                     researchGroup,
                     realisedFor,
@@ -237,3 +336,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+ */
