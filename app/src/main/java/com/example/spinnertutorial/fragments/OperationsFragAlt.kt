@@ -1,7 +1,6 @@
 package com.example.spinnertutorial.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +12,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnertutorial.databinding.GeneralFragBinding
 
-import com.example.spinnertutorial.fragments.adapters.OperationsAdapter
+import com.example.spinnertutorial.fragments.adapters.OperationsAdapterAlt
+import com.example.spinnertutorial.lists.AltLists
 import com.example.spinnertutorial.lists.Lists
+import com.example.spinnertutorial.lists.OperationItem
 import com.example.spinnertutorial.otherAlertDialog
 
-class OperationsFrag : Fragment() {
+class OperationsFragAlt : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var operationsList: List<String>
-    private lateinit var operationAdapter: OperationsAdapter
+    private lateinit var operationsList: List<OperationItem>
+    private lateinit var operationAdapter: OperationsAdapterAlt
 
     private var _binding: GeneralFragBinding? = null
     private val binding get() = _binding!!
@@ -44,26 +45,27 @@ class OperationsFrag : Fragment() {
         // create list according to instrument
         model.selectedInstrument.observe(viewLifecycleOwner, Observer { data ->
             when (data) {
-                Lists.instruments[0].name -> operationsList = Lists.fumehoodSolventOperations
-                Lists.instruments[1].name -> operationsList = Lists.fumehoodEtchingOperations
-                Lists.instruments[2].name -> operationsList = Lists.fumehoodHFOperations
-                Lists.instruments[3].name -> operationsList = Lists.dienerOperations
-                Lists.instruments[4].name -> operationsList = Lists.dektakOperations
-                Lists.instruments[5].name -> operationsList = Lists.zeissA2Operations
-                Lists.instruments[6].name -> operationsList = Lists.rfidOperations
+                Lists.instruments[0].name -> operationsList = AltLists.fumehoodSolventOperations
+                Lists.instruments[1].name -> operationsList = AltLists.fumehoodEtchingOperations
+                Lists.instruments[2].name -> operationsList = AltLists.fumehoodHFOperations
+                Lists.instruments[3].name -> operationsList = AltLists.dienerOperations
+                Lists.instruments[4].name -> operationsList = AltLists.dektakOperations
+                Lists.instruments[5].name -> operationsList = AltLists.zeissA2Operations
+                Lists.instruments[6].name -> operationsList = AltLists.rfidOperations
 
                 else -> Toast.makeText(activity, "Please select Instrument first", Toast.LENGTH_LONG).show()
             }
-            operationAdapter = OperationsAdapter(operationsList)
+            operationAdapter = OperationsAdapterAlt(operationsList)
             recyclerView.adapter = operationAdapter
 
             val selectedOperations = mutableListOf<String>()
             operationAdapter.onItemClick = {
                 if (it == "Other") {
-                    selectedOperations.clear()
+
                     activity?.let { it1 -> otherAlertDialog(it1, model) }
                     model.otherInfo.observe(viewLifecycleOwner, Observer {data ->
                         val otherOperation = data
+                        selectedOperations.clear()
                         selectedOperations.add(otherOperation)
                     })
 

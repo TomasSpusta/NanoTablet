@@ -60,67 +60,7 @@
 
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toEndOf="@+id/fragment_container"
-        app:layout_constraintStart_toStartOf="@+id/fragment_container">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_plus"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:background="@color/nano_blue"
-                android:text="+" />
-
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/btn_minus"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:background="@color/nano_blue"
-                android:gravity="center"
-                android:text="-" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_reservation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/nano_blue"
-
-            android:text="Make reservation"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_log_off"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Log off" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/LL_left_menu"
         android:layout_width="250dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -129,78 +69,72 @@
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/LL_top_info">
 
-        <Button
-            android:id="@+id/btn_instruments"
-            style="@style/menu_button"
-            android:text="@string/instruments" />
-
-        <Button
-            android:id="@+id/btn_operations"
-            style="@style/menu_button"
-            android:text="@string/operations" />
-
-        <Button
-            android:id="@+id/btn_materials"
-            style="@style/menu_button"
-            android:text="@string/sample_materials" />
-
-        <Button
-            android:id="@+id/btn_layers"
-            style="@style/menu_button"
-            android:text="@string/additional_layers" />
-
-        <Button
-            android:id="@+id/btn_sizes"
-            style="@style/menu_button"
-            android:text="@string/sample_sizes" />
-
-
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/menu_fragment_container"
+            android:name="com.example.spinnertutorial.fragments.ResParFrag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/fragment_container"
+        android:id="@+id/middle_fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/LL_top_info">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/LL_left_menu"
+        app:layout_constraintTop_toBottomOf="@+id/LL_top_info"
+        app:layout_constraintVertical_bias="1.0">
 
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/LL_pokus"
-        android:layout_width="184dp"
-        android:layout_height="614dp"
-        android:layout_marginTop="1dp"
+        android:id="@+id/LL_right_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/LL_top_info">
 
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:layout_marginBottom="20dp"/>
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:layout_marginBottom="20dp"/>
-
-        <TextView
             android:id="@+id/reservation_payload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:text="Reservation payload"
-            android:layout_marginBottom="20dp"/>
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_reservation"
+        android:layout_width="0dp"
+        style="@style/menu_button"
+        android:textSize="18sp"
+
+        android:text="Prepare reservation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+    <Button
+        android:id="@+id/btn_log_off"
+        android:layout_width="0dp"
+        android:text="Log off"
+        style="@style/menu_button"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_reservation"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

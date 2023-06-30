@@ -5,4 +5,5 @@
     <string name="sample_materials">Sample materials</string>
     <string name="additional_layers">Additional layers</string>
     <string name="sample_sizes">Sample Sizes</string>
+    <string name="pick_time">Pick Time</string>
 </resources>

@@ -2,52 +2,66 @@ package com.example.spinnertutorial
 
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.text.Layout
-import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.spinnertutorial.databinding.ActivityMainBinding
-import com.example.spinnertutorial.fragments.FragmentInterface
+import com.example.spinnertutorial.fragments.InfoFrag
 import com.example.spinnertutorial.fragments.InstrumentsFrag
-import com.example.spinnertutorial.fragments.LayersFrag
-import com.example.spinnertutorial.fragments.MaterialsFrag
-import com.example.spinnertutorial.fragments.OperationsFrag
-import com.example.spinnertutorial.fragments.SizesFrag
+
+import com.example.spinnertutorial.fragments.OperationsFragAlt
+import com.example.spinnertutorial.fragments.ResParFrag
+import com.example.spinnertutorial.fragments.SharedViewModel
+import com.example.spinnertutorial.lists.AltLists
+import com.example.spinnertutorial.lists.Lists
 
 
-class MainActivity : AppCompatActivity(), FragmentInterface {
+// Tutorial podla ktereho idem:
+//https://www.geeksforgeeks.org/shared-viewmodel-in-android/
+
+class MainActivity : AppCompatActivity() {
 
     //binding of activity_main.xml
     private lateinit var binding: ActivityMainBinding
-    lateinit var map: MutableMap<String, String>
 
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //inflate binding of activity_main.xml
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        map = mutableMapOf(
-            "instrument" to "",
-            "operations" to "",
-            "material" to "",
-            "layer" to "",
-            "size" to ""
-        )
+        replaceFragment(InfoFrag())
+        prepareMenu(ResParFrag())
+        val model = ViewModelProvider(this)[SharedViewModel::class.java]
+        model.selectedItem.observe(this, Observer { data ->
+            when (data) {
+                0 -> replaceFragment(InstrumentsFrag())
+            }
+        })
 
+
+
+        /*
         //set onClickListeners for buttons to replace fragments
         binding.btnInstruments.setOnClickListener {
             replaceFragment(InstrumentsFrag())
+
         }
+
+
+
         binding.btnOperations.setOnClickListener {
-            replaceFragment(OperationsFrag())
+            replaceFragment(OperationsFragAlt())
         }
+        // TODO: tady bude fce, kdtera bude rozhodovat, co bude viditelne a co ne
         binding.btnMaterials.setOnClickListener {
             replaceFragment(MaterialsFrag())
         }
@@ -56,6 +70,24 @@ class MainActivity : AppCompatActivity(), FragmentInterface {
         }
         binding.btnSizes.setOnClickListener {
             replaceFragment(SizesFrag())
+        }
+
+        binding.btnTime.setOnClickListener {
+            replaceFragment(TimeFrag())
+        }
+*/
+        binding.btnReservation.setOnClickListener {
+            prepareReservation(model, binding)
+            //TODO: Alert dialog -> Are you sure to make reservation? YES/NO
+            //TODO: YES -> make reservation, NO -> back to selection
+
+
+        }
+        binding.btnLogOff.setOnClickListener {
+            finish()
+            val intent = Intent(this, ScanCard::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 1)
         }
 
 
@@ -72,50 +104,26 @@ class MainActivity : AppCompatActivity(), FragmentInterface {
     }
 
 
-    /*
-        override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-            super.onSaveInstanceState(outState, outPersistentState)
-
-            outState.putInt("selectedInstrument",selectedInstrument)
-
-        }
-
-     */
-
-
     private fun replaceFragment(fragment: Fragment) {
+        val model = ViewModelProvider(this)[SharedViewModel::class.java]
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        // binding.textView5.text = "Selected instrument: ${map["instrument"]},\n" +
-        //       "Selected operations: ${map["operations"]}"
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.replace(R.id.middle_fragment_container, fragment)
+        prepareReservation(model, binding)
         fragmentTransaction.commit()
 
     }
 
-    override fun transferInstrument(instrument: String) {
-
-        map["instrument"] = instrument
-
+    private fun prepareMenu(fragment: Fragment) {
+        val model = ViewModelProvider(this)[SharedViewModel::class.java]
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.menu_fragment_container, fragment)
+        prepareReservation(model, binding)
+        fragmentTransaction.commit()
     }
 
-    override fun transferOperations(operations: List<String>) {
-        map["operations"] = operations.toString()
-    }
 
-    override fun transferMaterial(material: String) {
-        // binding.textView6.text = material
-        map["material"] = material
-
-    }
-
-    override fun transferLayer(layer: String) {
-        map["layer"] = layer
-    }
-
-    override fun transferSize(size: String) {
-        map["size"] = size
-    }
     /*
         @SuppressLint("SetTextI18n")
         override fun transferNames(name: String) {

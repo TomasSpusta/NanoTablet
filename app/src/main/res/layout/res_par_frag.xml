@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+>
 
     <!--Linear layout orientation vertical-->
     <LinearLayout
@@ -14,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--RecyclerView-->
+       <!--RecyclerView-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_ops"
+            android:id="@+id/rv_res_par"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />

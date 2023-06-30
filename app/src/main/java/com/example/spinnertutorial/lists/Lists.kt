@@ -5,13 +5,13 @@ object Lists {
 
 
     val instruments = listOf(
-        InstrumentItem("Fume-hood Solvent I", "cd4d42a8-3453-e311-85a1-005056991551"),
-        InstrumentItem("Fume-hood Etching", "d34d42a8-3453-e311-85a1-005056991551"),
-        InstrumentItem("Fume-hood HF", "d54d42a8-3453-e311-85a1-005056991551"),
-        InstrumentItem("Diener", "655242a8-3453-e311-85a1-005056991551"),
-        InstrumentItem("Dektak", "a15042a8-3453-e311-85a1-005056991551"),
-        InstrumentItem("ZEISS A2", "a75871be-07e4-e411-86ce-005056991551"),
-        InstrumentItem("RFID-TEST", "45856b41-8ae8-ec11-80cd-005056914121")
+        Instrument("Fume-hood Solvent I", "cd4d42a8-3453-e311-85a1-005056991551"), // operations, material, layer, size, other (from lists)
+        Instrument("Fume-hood Etching", "d34d42a8-3453-e311-85a1-005056991551"), // operations, material, layer, size, other (from lists)
+        Instrument("Fume-hood HF", "d54d42a8-3453-e311-85a1-005056991551"), // operations, material, layer, size, other (from lists)
+        Instrument("Diener", "655242a8-3453-e311-85a1-005056991551"), // Popis vzorku, Recipe or experimental conditions, Cleaning time (s), Různé
+        Instrument("Dektak", "a15042a8-3453-e311-85a1-005056991551"), // popis vzorku, other
+        Instrument("ZEISS A2", "a75871be-07e4-e411-86ce-005056991551"), // other
+        Instrument("RFID-TEST", "45856b41-8ae8-ec11-80cd-005056914121")
     )
 
     val fumehoodSolventOperations = listOf("Resist Stripping", "Au lift-off", "Metal lift-off", "Cleaning", "Other")
@@ -30,13 +30,15 @@ object Lists {
         "Other"
     )
 
-    val fumehoodHFOperations = listOf("Please select operation", "BOE etch", "HF etch", "HF vapour etcher", "Cleaning", "Other")
+    val fumehoodHFOperations = listOf("BOE etch", "HF etch", "HF vapour etcher", "Cleaning", "Other")
 
     val dienerOperations = listOf("Resist stripping", "Sample cleaning", "Other")
 
     val dektakOperations = listOf("Sample inspection", "Sample mapping", "Other")
 
     val zeissA2Operations = listOf("Sample inspection", "Other")
+
+    val rfidOperations = listOf("Sample inspection", "Other")
 
     val additionalLayers = listOf("None", "SiO2", "Si3N4", "Graphene", "Other")
 

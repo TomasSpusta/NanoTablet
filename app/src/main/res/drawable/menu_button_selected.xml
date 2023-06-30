@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="false">
+    <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/nano_blue" />
             <stroke android:width="1dp" android:color="#000000" />
@@ -9,10 +9,10 @@
         </shape>
     </item>
 
-    <item android:state_pressed="true">
+    <item android:state_pressed="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/nano_dark_blue" />
-            <stroke android:width="1dp" android:color="#FFFFFF" />
+            <solid android:color="@color/teal_700" />
+            <stroke android:width="1dp" android:color="#000000" />
             <corners android:radius="5dp" />
 
         </shape>
