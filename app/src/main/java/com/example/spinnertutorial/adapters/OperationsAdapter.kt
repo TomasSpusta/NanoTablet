@@ -1,4 +1,4 @@
-package com.example.spinnertutorial.fragments.adapters
+package com.example.spinnertutorial.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -13,12 +13,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnertutorial.R
 import com.example.spinnertutorial.lists.Instrument
-import com.example.spinnertutorial.lists.OperationItem
 
-class OperationsAdapterAlt( val operationsList: List<OperationItem>) : RecyclerView.Adapter<OperationsAdapterAlt.MyViewHolder>() {
+class OperationsAdapter(private val operationsList: List<String>) : RecyclerView.Adapter<OperationsAdapter.MyViewHolder>() {
 
 
-    private val itemSelectedList = mutableListOf<Int>()
     var onItemClick: ((String) -> Unit)? = null
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,23 +36,15 @@ class OperationsAdapterAlt( val operationsList: List<OperationItem>) : RecyclerV
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = operationsList[position]
 
-        holder.textView.text = item.name
+        holder.textView.text = item
 
         holder.textView.setOnClickListener {
-            //selectItem(holder, item.name, position)
-
-            onItemClick?.invoke(item.name)
-            if (itemSelectedList.contains(position)) {
-                itemSelectedList.removeAt(position)
-                item.isSelected = false
-                holder.textView.setBackgroundResource(R.drawable.menu_button)
-
-            } else {
-                itemSelectedList.add(position)
-                item.isSelected = true
-                holder.textView.setBackgroundResource(R.drawable.menu_button_selected)
-            }
-
+            onItemClick?.invoke(item)
         }
+
+
+
     }
+
+
 }

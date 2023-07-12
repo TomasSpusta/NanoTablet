@@ -16,7 +16,7 @@
 
        <!--RecyclerView-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_res_par"
+            android:id="@+id/rv_res_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />

@@ -1,4 +1,4 @@
-package com.example.spinnertutorial.fragments.adapters
+package com.example.spinnertutorial.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -38,6 +38,7 @@ class InstrumentAdapter(private val instrumentList: List<Instrument>) : Recycler
             selectedItemPosition = position
             notifyDataSetChanged()
             onItemClick?.invoke(item)
+
         }
         if (selectedItemPosition == position) {
             holder.textView.setBackgroundResource(R.drawable.menu_button_selected)

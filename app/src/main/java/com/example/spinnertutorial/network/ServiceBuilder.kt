@@ -10,7 +10,7 @@ We can set many properties like, converter factory for json parsing,
 base url, http client and many more configurations as required.
 Here is the simplest required form for our tasks.*/
 
-val baseURL = "https://booking-beta1.ceitec.cz/"
+val baseURL = "https://booking-beta2.ceitec.cz/"
 val baseURL2 = "https://crm.api.ceitec.cz/"
 object BookingServiceBuilder {
 

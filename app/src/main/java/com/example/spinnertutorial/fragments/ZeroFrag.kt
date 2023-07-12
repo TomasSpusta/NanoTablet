@@ -5,26 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import android.widget.Toast
-
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.spinnertutorial.Global.fieldsOptions
 import com.example.spinnertutorial.databinding.GeneralFragBinding
-import com.example.spinnertutorial.fragments.adapters.GeneralAdapter
-import com.example.spinnertutorial.lists.Lists
+
+import com.example.spinnertutorial.adapters.GeneralAdapter
 import com.example.spinnertutorial.otherAlertDialog
 
-class MaterialsFrag : Fragment() {
+class ZeroFrag : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var materialList: List<String>
-    private lateinit var materialAdapter: GeneralAdapter
+
+    private lateinit var zeroAdapter: GeneralAdapter
 
     private var _binding: GeneralFragBinding? = null
     private val binding get() = _binding!!
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -35,26 +35,24 @@ class MaterialsFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val model = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-        materialList = listOf()
+
         recyclerView = _binding!!.rvGeneral
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(view.context, 2)
 
-        materialList = Lists.sampleMaterials
-        materialAdapter = GeneralAdapter(materialList)
-        recyclerView.adapter = materialAdapter
+        val zeroList = fieldsOptions.get(2)
+        zeroAdapter = GeneralAdapter(zeroList)
+        recyclerView.adapter = zeroAdapter
 
-
-        materialAdapter.onItemClick = {
+        zeroAdapter.onItemClick = {
 
             if (it == "Other") {
                 activity?.let { it1 -> otherAlertDialog(it1, model) }
                 model.otherInfo.observe(viewLifecycleOwner, Observer { data ->
-                    model.storeMaterial(data)
+                    model.storeSize(data)
                 })
             } else {
-                val selectedMaterial = it
-                model.storeMaterial(selectedMaterial)
+                model.storeSize(it)
             }
 
         }

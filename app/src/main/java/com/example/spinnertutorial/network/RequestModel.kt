@@ -14,6 +14,10 @@ class BookingReqM(
     @SerializedName("realised_for") val userID: String?,
     @SerializedName("time_requirement") val timeRequirement: Int?,
     @SerializedName("status_code") val statusCode: Int?,
-    @SerializedName ("description") val description: String?
+    @SerializedName ("description") val description: String?,
+    @SerializedName ("fields") val fields : Map<String?,Map<String?,String?>>
 
     )
+class FieldReqM(
+    @SerializedName("from") val timeFrom: String?,
+)

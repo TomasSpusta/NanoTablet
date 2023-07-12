@@ -1,4 +1,4 @@
-package com.example.spinnertutorial.fragments.adapters
+package com.example.spinnertutorial.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import com.example.spinnertutorial.lists.Instrument
 
 class MenuAdapter(private val menuList: List<String>) : RecyclerView.Adapter<MenuAdapter.MyViewHolder>() {
     private var selectedItemPosition: Int = -1
-    var onItemClick: ((String) -> Unit)? = null
+    var onItemClick: ((Int) -> Unit)? = null
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.tv_rv_name)
@@ -37,7 +37,7 @@ class MenuAdapter(private val menuList: List<String>) : RecyclerView.Adapter<Men
         holder.textView.setOnClickListener {
             selectedItemPosition = position
             notifyDataSetChanged()
-            onItemClick?.invoke(item)
+            onItemClick?.invoke(position)
         }
         if (selectedItemPosition == position) {
             holder.textView.setBackgroundResource(R.drawable.menu_button_selected)

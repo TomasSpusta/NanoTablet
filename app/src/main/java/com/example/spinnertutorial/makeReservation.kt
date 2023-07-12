@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.spinnertutorial.network.BookingReqM
 import com.example.spinnertutorial.network.RestApiManager
+import com.google.gson.annotations.SerializedName
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -20,7 +21,8 @@ fun makeReservation(
     realisedFor: String?,
     timeRequirement: Int?,
     statusCode: Int?,
-    description: String?
+    description: String?,
+    fields : Map<String?,Map<String?,String?>>
 ) {
 
     val timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
@@ -39,7 +41,8 @@ fun makeReservation(
         userID = realisedFor,
         timeRequirement = timeRequirement,
         statusCode = statusCode,
-        description = description
+        description = description,
+        fields = fields
     )
     apiService.BookingRequest(reservationInfo) {
         if (it != null) {

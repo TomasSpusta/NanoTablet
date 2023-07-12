@@ -8,7 +8,7 @@ fun refreshReservation (
     binding : ActivityMainBinding,
 map : MutableMap<String, String>
 ) {
-
+/*
     binding.reservationPayload.text = "Preparing reservation: \n" +
             map["instrument"] + "\n" +
             map["operations"] + "\n" +
@@ -16,5 +16,5 @@ map : MutableMap<String, String>
             map["layer"] + "\n" +
             map["size"] + "\n" +
             map["time"] + " minutes"
-
+*/
 }

@@ -21,12 +21,12 @@ import com.example.spinnertutorial.databinding.GeneralFragBinding
 import com.example.spinnertutorial.databinding.InstrumentsFragBinding
 import com.example.spinnertutorial.databinding.LayerFragBinding
 import com.example.spinnertutorial.databinding.TimeFragBinding
-import com.example.spinnertutorial.fragments.adapters.GeneralAdapter
+import com.example.spinnertutorial.adapters.GeneralAdapter
 import com.example.spinnertutorial.lists.Lists
 import com.example.spinnertutorial.setupRadioButtons
 
 class TimeFrag : Fragment() {
-
+// fragment displaying time selection interface
     private var _binding: TimeFragBinding? = null
     private val binding get() = _binding!!
 

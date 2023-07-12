@@ -1,4 +1,4 @@
-package com.example.spinnertutorial.fragments.adapters
+package com.example.spinnertutorial.adapters
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog

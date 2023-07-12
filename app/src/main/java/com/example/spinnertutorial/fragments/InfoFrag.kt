@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnertutorial.databinding.GeneralFragBinding
 import com.example.spinnertutorial.databinding.InfoFragBinding
-import com.example.spinnertutorial.fragments.adapters.InstrumentAdapter
+import com.example.spinnertutorial.adapters.InstrumentAdapter
 import com.example.spinnertutorial.databinding.InstrumentsFragBinding
 import com.example.spinnertutorial.lists.Instrument
 import com.example.spinnertutorial.lists.Lists
 
 class InfoFrag : Fragment() {
 
-
+// information on main page after login
 
     private var _binding: InfoFragBinding? = null
     private val binding get() = _binding!!
@@ -33,7 +33,6 @@ class InfoFrag : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val model = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         _binding!!.textView.text = "Please select one of instruments first"
 
