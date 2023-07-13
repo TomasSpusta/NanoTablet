@@ -1,20 +1,19 @@
 package com.example.spinnertutorial.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.RequiresApi
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.spinnertutorial.Global.instrumentGUID
-import com.example.spinnertutorial.Global.userFieldsNames
+import com.example.spinnertutorial.Global.reservationMap
+import com.example.spinnertutorial.Global.reservationMapMap
+
 import com.example.spinnertutorial.MainActivity
 import com.example.spinnertutorial.databinding.GeneralFragBinding
 import com.example.spinnertutorial.adapters.InstrumentAdapter
@@ -22,7 +21,7 @@ import com.example.spinnertutorial.lists.Instrument
 import com.example.spinnertutorial.lists.Lists
 import com.example.spinnertutorial.network.GetUserFields
 import com.example.spinnertutorial.prepareMenu
-import com.example.spinnertutorial.replaceFragment
+import com.example.spinnertutorial.reloadInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -46,13 +45,13 @@ class InstrumentsFrag : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val model = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+
 
         recyclerView = _binding!!.rvGeneral
         recyclerView.setHasFixedSize(true)
-        // recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = GridLayoutManager(view.context, 2)
 
         instrumentList = Lists.instruments
@@ -61,20 +60,26 @@ class InstrumentsFrag : Fragment() {
         recyclerView.adapter = instrumentAdapter
 
         instrumentAdapter.onItemClick = {
-            val selectedInstrument = it.name
-            //model.storeInstrument(selectedInstrument)
-            instrumentGUID = it.instrumentGUID
+           // reservationMap.putAll(mapOf("Instrument" to it.name,"InstrumentGUID" to it.GUID)) //listOf(it.name,it.GUID)
+            //reservationMap["InstrumentGUID"] = it.GUID
+            reservationMapMap["Instrument"]!!["Instrument name"] = it.name
+            reservationMapMap["Instrument"]!!["Instrument GUID"] = it.GUID
+
+
 
             GlobalScope.launch(Dispatchers.Default) {
-                GetUserFields(instrumentGUID)
+                GetUserFields(it.GUID)
                 //Log.i("Response_button", GlobalVariables.userFields.toString())
             }
-            Thread.sleep(1000)
+            Thread.sleep(1500)
 
             prepareMenu(MenuFrag(), requireActivity() as MainActivity)
+            reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
 
             //Toast.makeText(activity, selectedInstrument, Toast.LENGTH_SHORT).show()
-            //Log.i("Resp equip name", userFieldsNames.toString())
+            Log.i("Resp res map", reservationMapMap.toString())
+            //reservationMapMap["Instrument"]?.get("Instrument name")?.let { it1 -> Log.i("Resp res map item", it1) }
+
 
         }
     }

@@ -72,7 +72,7 @@
         <Button
             android:id="@+id/btn_instruments"
             android:layout_width="match_parent"
-            android:text="Instruemnts"
+            android:text="Instruments"
             style="@style/menu_button"
             android:textSize="18sp"/>
 
@@ -111,7 +111,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/res_info_fragment_container"
-            android:name="com.example.spinnertutorial.fragments.ReservationFrag"
+            android:name="com.example.spinnertutorial.fragments.ResInfoFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

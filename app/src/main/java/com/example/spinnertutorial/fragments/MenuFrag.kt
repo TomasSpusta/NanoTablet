@@ -1,6 +1,7 @@
 package com.example.spinnertutorial.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.spinnertutorial.Global.fieldsOptions
+import com.example.spinnertutorial.Global.menuFields
+import com.example.spinnertutorial.Global.subMenuFields
+import com.example.spinnertutorial.Global.reservationMap
+import com.example.spinnertutorial.Global.selectedMenuItem
 import com.example.spinnertutorial.Global.userFieldsNames
 import com.example.spinnertutorial.MainActivity
 import com.example.spinnertutorial.adapters.MenuAdapter
@@ -31,8 +35,8 @@ class MenuFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val menuList = userFieldsNames
-        val menuListLen = menuList.size
+        val menuList = menuFields//userFieldsNames
+
         recyclerView = _binding!!.rvMenu
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
@@ -42,17 +46,18 @@ class MenuFrag : Fragment() {
         recyclerView.adapter = menuAdapter
 
         menuAdapter.onItemClick = {
-            when (it) {
-                0 -> replaceFragment(BasicFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                1 -> replaceFragment(BasicFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                2 -> replaceFragment(BasicFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                3 -> replaceFragment(BasicFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                4 -> replaceFragment(BasicFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                5 -> replaceFragment(BasicFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-            }
+            replaceAndSave(it, requireActivity() as MainActivity)
+            /* when (it) {
+                    0 -> replaceAndSave(it,requireActivity() as MainActivity)
+                    1 -> replaceAndSave(it,requireActivity() as MainActivity)//replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
+                    2 -> replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
+                    3 -> replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
+                    4 -> replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
+                    5 -> replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
+                }
+
+                */
         }
-
-
     }
 
     override fun onDestroyView() {
@@ -61,6 +66,25 @@ class MenuFrag : Fragment() {
     }
 }
 
+private fun replaceAndSave(it: Int, activity: MainActivity) {
+    replaceFragment(SubMenuFrag(subMenuFields[it]), activity)
+    selectedMenuItem = it.toString()
+    //selectedFields[it.toString()] = fieldsOptions[it]
+    //reservationMap["$it value"] = subMenuFields [it]
+    Log.i("Resp res menu map", reservationMap.toString())
 
+}
 
+/*
+val  reservationPayload= mutableMapOf(
+    "instrument" to Global.selectedInstrument,
+    "instrumentGUID" to Global.selectedInstrumentGUID,
+    "field1" to model.selectedOperations.value.toString(),
+    "field2" to model.selectedMaterial.value.toString(),
+    "field3" to model.selectedLayer.value.toString(),
+    "field4" to model.selectedSize.value.toString(),
+    "field5" to model.selectedTime.value.toString(),
+    "field6" to model.selectedTime.value.toString()
+)
 
+ */

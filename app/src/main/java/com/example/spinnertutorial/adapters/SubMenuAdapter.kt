@@ -1,26 +1,30 @@
 package com.example.spinnertutorial.adapters
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.MainThread
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnertutorial.Global
-import com.example.spinnertutorial.Global.reservationMap
 import com.example.spinnertutorial.Global.reservationMapMap
-
-import com.example.spinnertutorial.MainActivity
 import com.example.spinnertutorial.R
-import com.example.spinnertutorial.fragments.SubMenuFrag
 import com.example.spinnertutorial.lists.Instrument
-import com.example.spinnertutorial.lists.MenuItem
-import com.example.spinnertutorial.replaceFragment
+import com.example.spinnertutorial.prepareReservation
+import kotlinx.coroutines.NonDisposableHandle.parent
 
-class MenuAdapter(private val menuList: List<MenuItem>) : RecyclerView.Adapter<MenuAdapter.MyViewHolder>() {
+class SubMenuAdapter(private val itemList: List<String>) : RecyclerView.Adapter<SubMenuAdapter.MyViewHolder>() {
     private var selectedItemPosition: Int = -1
-    var onItemClick: ((Int) -> Unit)? = null
+    var onItemClick: ((String) -> Unit)? = null
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.tv_rv_name)
@@ -35,27 +39,23 @@ class MenuAdapter(private val menuList: List<MenuItem>) : RecyclerView.Adapter<M
     override fun getItemCount(): Int {
 
         //Log.d("act", instrumentList.size.toString())
-        return menuList.size
+        return itemList.size
     }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        val item = menuList[position]
-        holder.textView.text = item.name
+        val item = itemList[position]
+
+        val menuItem = reservationMapMap["Fields"]!!["$position GUID"]
+
+        holder.textView.text = item
 
         holder.textView.setOnClickListener {
             selectedItemPosition = position
             notifyDataSetChanged()
-            onItemClick?.invoke(position)
-            //reservationMap[position.toString()] = mutableMapOf("name" to item.name,"guid" to item.GUID)
-           reservationMapMap["Fields"]!!["$position name"] = item.name
-            reservationMapMap["Fields"]!!["$position GUID"] = item.GUID
 
-            //reservationMap["$position name"] = item.name
-            //reservationMap["$position GUID"] = item.GUID
-
-
-            Log.i("Resp res map", reservationMapMap.toString())
+            onItemClick?.invoke(item)
+            //https://www.youtube.com/watch?v=vDAO7H5w4_I&ab_channel=Indently
 
         }
         if (selectedItemPosition == position) {
@@ -63,7 +63,10 @@ class MenuAdapter(private val menuList: List<MenuItem>) : RecyclerView.Adapter<M
         } else {
             holder.textView.setBackgroundResource(R.drawable.menu_button)
         }
-
     }
 }
+
+
+
+
 

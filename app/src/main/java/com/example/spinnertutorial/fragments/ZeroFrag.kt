@@ -10,14 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.spinnertutorial.Global.fieldsOptions
+import com.example.spinnertutorial.Global.subMenuFields
 import com.example.spinnertutorial.databinding.GeneralFragBinding
 
 import com.example.spinnertutorial.adapters.GeneralAdapter
 import com.example.spinnertutorial.otherAlertDialog
 
 class ZeroFrag : Fragment() {
-
+//
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var zeroAdapter: GeneralAdapter
@@ -40,7 +40,7 @@ class ZeroFrag : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(view.context, 2)
 
-        val zeroList = fieldsOptions.get(2)
+        val zeroList = subMenuFields.get(2)
         zeroAdapter = GeneralAdapter(zeroList)
         recyclerView.adapter = zeroAdapter
 
