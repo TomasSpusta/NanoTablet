@@ -7,16 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.spinnertutorial.Global
 import com.example.spinnertutorial.Global.reservationMap
-import com.example.spinnertutorial.Global.reservationMapMap
 
-import com.example.spinnertutorial.MainActivity
 import com.example.spinnertutorial.R
-import com.example.spinnertutorial.fragments.SubMenuFrag
-import com.example.spinnertutorial.lists.Instrument
 import com.example.spinnertutorial.lists.MenuItem
-import com.example.spinnertutorial.replaceFragment
 
 class MenuAdapter(private val menuList: List<MenuItem>) : RecyclerView.Adapter<MenuAdapter.MyViewHolder>() {
     private var selectedItemPosition: Int = -1
@@ -48,14 +42,14 @@ class MenuAdapter(private val menuList: List<MenuItem>) : RecyclerView.Adapter<M
             notifyDataSetChanged()
             onItemClick?.invoke(position)
             //reservationMap[position.toString()] = mutableMapOf("name" to item.name,"guid" to item.GUID)
-           reservationMapMap["Fields"]!!["$position name"] = item.name
-            reservationMapMap["Fields"]!!["$position GUID"] = item.GUID
+           reservationMap["Fields"]!!["$position name"] = item.name
+            reservationMap["Fields"]!!["$position GUID"] = item.GUID
 
             //reservationMap["$position name"] = item.name
             //reservationMap["$position GUID"] = item.GUID
 
 
-            Log.i("Resp res map", reservationMapMap.toString())
+            Log.i("Resp res map", reservationMap.toString())
 
         }
         if (selectedItemPosition == position) {

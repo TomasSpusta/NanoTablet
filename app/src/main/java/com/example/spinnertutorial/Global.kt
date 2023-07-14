@@ -1,7 +1,6 @@
 package com.example.spinnertutorial
 
 import com.example.spinnertutorial.lists.MenuItem
-import org.json.JSONObject
 
 object Global {
 
@@ -21,13 +20,10 @@ object Global {
 
 var selectedMenuItem = String()
 
-    var reservationMap = mutableMapOf<String,Any>(
-        "Instrument" to "",
-        "InstrumentGUID" to "",
-    )
 
 
-    var reservationMapMap = mutableMapOf(
+
+    var reservationMap = mutableMapOf(
         "Instrument" to mutableMapOf<String,String>(),
         "Fields" to mutableMapOf<String,String>(),
     )

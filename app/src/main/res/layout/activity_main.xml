@@ -114,6 +114,12 @@
             android:name="com.example.spinnertutorial.fragments.ResInfoFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_time"
+            android:layout_width="match_parent"
+            style="@style/menu_button"
+            android:text="Select Time"
+            android:textSize="18sp"/>
 
 
     </LinearLayout>

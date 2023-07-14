@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnertutorial.Global.reservationMap
-import com.example.spinnertutorial.Global.selectedInstrument
 import com.example.spinnertutorial.adapters.ResInfoAdapter
 
 import com.example.spinnertutorial.databinding.ReservationFragBinding
@@ -32,22 +31,22 @@ class ResInfoFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         val infoList = mutableListOf(
-            reservationMap["Instrument"].toString(),
-            "bla","bla","bla")//reservationPayload
+            reservationMap["Instrument"]?.get("Instrument name"),
+            listItem(0),
+            listItem(1),
+            listItem(2),
+            listItem(3),
+            listItem(4),
+            listItem(5),
+        )
 
         recyclerView = _binding!!.rvResInfo
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
 
-
         fragAdapter = ResInfoAdapter(infoList)
         recyclerView.adapter = fragAdapter
-
-
     }
 
     override fun onDestroyView() {
@@ -56,6 +55,12 @@ class ResInfoFrag : Fragment() {
     }
 }
 
-
-
-
+private fun listItem(fieldPosition: Int): String {
+    val infoListItem: String?
+    if (reservationMap["Fields"]?.get("$fieldPosition name") != null) {
+        infoListItem = "${reservationMap["Fields"]?.get("$fieldPosition name")}: ${reservationMap["Fields"]?.get("$fieldPosition value")}"
+    } else {
+        infoListItem = ""
+    }
+    return infoListItem
+}

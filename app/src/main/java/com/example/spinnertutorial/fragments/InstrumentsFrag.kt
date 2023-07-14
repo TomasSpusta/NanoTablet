@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnertutorial.Global.reservationMap
-import com.example.spinnertutorial.Global.reservationMapMap
 
 import com.example.spinnertutorial.MainActivity
 import com.example.spinnertutorial.databinding.GeneralFragBinding
@@ -60,10 +59,9 @@ class InstrumentsFrag : Fragment() {
         recyclerView.adapter = instrumentAdapter
 
         instrumentAdapter.onItemClick = {
-           // reservationMap.putAll(mapOf("Instrument" to it.name,"InstrumentGUID" to it.GUID)) //listOf(it.name,it.GUID)
-            //reservationMap["InstrumentGUID"] = it.GUID
-            reservationMapMap["Instrument"]!!["Instrument name"] = it.name
-            reservationMapMap["Instrument"]!!["Instrument GUID"] = it.GUID
+
+            reservationMap["Instrument"]!!["Instrument name"] = it.name
+            reservationMap["Instrument"]!!["Instrument GUID"] = it.GUID
 
 
 
@@ -77,7 +75,7 @@ class InstrumentsFrag : Fragment() {
             reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
 
             //Toast.makeText(activity, selectedInstrument, Toast.LENGTH_SHORT).show()
-            Log.i("Resp res map", reservationMapMap.toString())
+            Log.i("Resp res map", reservationMap.toString())
             //reservationMapMap["Instrument"]?.get("Instrument name")?.let { it1 -> Log.i("Resp res map item", it1) }
 
 

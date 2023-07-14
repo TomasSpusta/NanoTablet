@@ -13,7 +13,6 @@ import com.example.spinnertutorial.Global.menuFields
 import com.example.spinnertutorial.Global.subMenuFields
 import com.example.spinnertutorial.Global.reservationMap
 import com.example.spinnertutorial.Global.selectedMenuItem
-import com.example.spinnertutorial.Global.userFieldsNames
 import com.example.spinnertutorial.MainActivity
 import com.example.spinnertutorial.adapters.MenuAdapter
 
@@ -67,24 +66,20 @@ class MenuFrag : Fragment() {
 }
 
 private fun replaceAndSave(it: Int, activity: MainActivity) {
-    replaceFragment(SubMenuFrag(subMenuFields[it]), activity)
+    if (subMenuFields[it].isEmpty()) {
+        Log.i("Resp other", "other was pressed")
+        reservationMap["Fields"]!![("$selectedMenuItem value")]=""
+        replaceFragment(OtherFrag(), activity)
+    //Log.i("Resp sub menu other", subMenuFields[it].toString())
+    } else {
+        replaceFragment(SubMenuFrag(subMenuFields[it]), activity)
+    }
+
     selectedMenuItem = it.toString()
     //selectedFields[it.toString()] = fieldsOptions[it]
     //reservationMap["$it value"] = subMenuFields [it]
     Log.i("Resp res menu map", reservationMap.toString())
+    Log.i("Resp submenu options", subMenuFields[it].toString())
 
 }
 
-/*
-val  reservationPayload= mutableMapOf(
-    "instrument" to Global.selectedInstrument,
-    "instrumentGUID" to Global.selectedInstrumentGUID,
-    "field1" to model.selectedOperations.value.toString(),
-    "field2" to model.selectedMaterial.value.toString(),
-    "field3" to model.selectedLayer.value.toString(),
-    "field4" to model.selectedSize.value.toString(),
-    "field5" to model.selectedTime.value.toString(),
-    "field6" to model.selectedTime.value.toString()
-)
-
- */

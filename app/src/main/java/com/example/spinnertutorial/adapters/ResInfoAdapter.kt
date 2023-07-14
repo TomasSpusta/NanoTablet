@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnertutorial.R
-import com.example.spinnertutorial.lists.ResParItem
 
-class ResInfoAdapter(private val itemList: MutableList<String>) : RecyclerView.Adapter<ResInfoAdapter.MyViewHolder>() {
+class ResInfoAdapter(private val itemList: MutableList<String?>) : RecyclerView.Adapter<ResInfoAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.tv_rv_name)
