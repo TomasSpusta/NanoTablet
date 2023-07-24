@@ -2,7 +2,6 @@ package com.example.spinnertutorial.network
 
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
@@ -13,13 +12,14 @@ Although example is shown for a typical POST call, we can use any REST methods o
 
 interface ApiInterface {
 
+
     @Headers("Content-Type: application/json")
     @POST ("get-contact-by-rfid")
-    fun sendCRMReq (@Body requestModel: CRMReqM): Call<CRMResMList>
+    fun sendCRMRequest (@Body requestModel: CRMRequestModel): Call<CRMResponseList>
 
-    @Headers ("Auth-Token: 4fe14cb3f9058e3146f76474b81e199d")
+    @Headers ("Auth-Token: $token")
     @POST ("api-public/service-appointment/")
-    fun sendBookingReq (@Body requestModel: BookingReqM): Call<BookingResM>
+    fun sendBookingRequest (@Body requestModel: BookingRequestModel): Call<BookingResponse>
 
 }
 

@@ -1,32 +1,38 @@
 package com.example.spinnertutorial
 
 import com.example.spinnertutorial.lists.MenuItem
+import org.json.JSONObject
 
 object Global {
 
-    var selectedInstrument = ""
-    var selectedInstrumentGUID = ""
 
 // MAP tutorial: https://marketsplash.com/tutorials/kotlin/kotlin-map/
 
+    // menu and sub menu fields get from API
     var menuFields = mutableListOf<MenuItem>()
-
-    var selectedTime = 0
-
-    var userFieldsGUIDs = mutableListOf<String>()
-    var userFieldsNames = mutableListOf<String>()
-
     var subMenuFields = mutableListOf<MutableList<String>>()
 
-var selectedMenuItem = String()
+    // time variable from time frag
+    var selectedTime = 0
 
+    //currently selected menu item, used to create proper values fro submenu items
+    var selectedMenuItem = String()
 
-
-
+    // reservation matrix with everything important
     var reservationMap = mutableMapOf(
-        "Instrument" to mutableMapOf<String,String>(),
-        "Fields" to mutableMapOf<String,String>(),
+        "Instrument" to mutableMapOf<String, String>(),
+        "Fields" to mutableMapOf<String, String>(),
+        "User" to mutableMapOf<String,String>(),
+       // "Time" to String ()
     )
+
+    // reservation matrix in JSON
+    var userJSON = JSONObject()
+    var instrumentJSON = JSONObject()
+    var fieldsJSON = JSONObject()
+    var reservationJSON = JSONObject()
+
+var nanoTag = "nano"
 
 }
 

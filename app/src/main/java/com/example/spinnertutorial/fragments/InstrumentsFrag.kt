@@ -7,15 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.spinnertutorial.Global
+import com.example.spinnertutorial.Global.instrumentJSON
+import com.example.spinnertutorial.Global.nanoTag
+import com.example.spinnertutorial.Global.reservationJSON
 import com.example.spinnertutorial.Global.reservationMap
-
 import com.example.spinnertutorial.MainActivity
-import com.example.spinnertutorial.databinding.GeneralFragBinding
 import com.example.spinnertutorial.adapters.InstrumentAdapter
+import com.example.spinnertutorial.databinding.GeneralFragBinding
 import com.example.spinnertutorial.lists.Instrument
 import com.example.spinnertutorial.lists.Lists
 import com.example.spinnertutorial.network.GetUserFields
@@ -24,6 +26,7 @@ import com.example.spinnertutorial.reloadInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 
 class InstrumentsFrag : Fragment() {
@@ -60,6 +63,12 @@ class InstrumentsFrag : Fragment() {
 
         instrumentAdapter.onItemClick = {
 
+            instrumentJSON.put("Name",it.name)
+            instrumentJSON.put("GUID",it.GUID)
+
+            //reservationJSON.put("Instrument", instrumentJSON)
+            Log.i("instrument_json", reservationJSON.toString())
+
             reservationMap["Instrument"]!!["Instrument name"] = it.name
             reservationMap["Instrument"]!!["Instrument GUID"] = it.GUID
 
@@ -74,9 +83,6 @@ class InstrumentsFrag : Fragment() {
             prepareMenu(MenuFrag(), requireActivity() as MainActivity)
             reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
 
-            //Toast.makeText(activity, selectedInstrument, Toast.LENGTH_SHORT).show()
-            Log.i("Resp res map", reservationMap.toString())
-            //reservationMapMap["Instrument"]?.get("Instrument name")?.let { it1 -> Log.i("Resp res map item", it1) }
 
 
         }

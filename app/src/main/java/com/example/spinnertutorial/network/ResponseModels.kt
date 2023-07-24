@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 
  */
 
-data class CRMResM(
+data class CRMResponseModel(
     @SerializedName("@odata.etag") val odata: String?,
     @SerializedName("firstname") val userFirstName: String?,
     @SerializedName("contactid") val userID: String?,
@@ -22,9 +22,9 @@ data class CRMResM(
     @SerializedName("primary_rg") val primaryRg: String?,
 )
 
-class CRMResMList : ArrayList<CRMResM>()
+class CRMResponseList : ArrayList<CRMResponseModel>()
 
-data class BookingResM (
+data class BookingResponse (
     @SerializedName("guid") val reservationGUID: String?,
         )
 

@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 
 import androidx.fragment.app.Fragment
+import com.example.spinnertutorial.Global.menuFields
 import com.example.spinnertutorial.Global.reservationMap
 import com.example.spinnertutorial.Global.selectedMenuItem
 import com.example.spinnertutorial.MainActivity
@@ -30,18 +31,19 @@ class OtherFrag : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var otherField = reservationMap["Fields"]!![("$selectedMenuItem value")]
-        if (otherField?.isNotEmpty() == true) {
-            binding.etOtherOption.setText(otherField, TextView.BufferType.EDITABLE)
+        var inputField = reservationMap["Fields"]!![("$selectedMenuItem value")]
+        if (inputField?.isNotEmpty() == true) {
+            binding.etOtherOption.setText(inputField, TextView.BufferType.EDITABLE)
         }
 
-        // _binding!!.textView.text = "Please select one of instruments first"
-        binding.btnSaveOther.setOnClickListener {
-            otherField = binding.etOtherOption.text.toString()
-            Log.i("Resp other field", otherField.toString())
-            binding.etOtherOption.onEditorAction(EditorInfo.IME_ACTION_DONE)
-            reservationMap["Fields"]!![("$selectedMenuItem value")] = otherField!!
+
+        binding.btnSaveInput.setOnClickListener {
+            inputField = binding.etOtherOption.text.toString()
+            reservationMap["Fields"]!![("$selectedMenuItem value")] = inputField!!
+
             reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
+            binding.etOtherOption.onEditorAction(EditorInfo.IME_ACTION_DONE)
+            Log.i("Sub menu input", inputField.toString())
         }
 
 

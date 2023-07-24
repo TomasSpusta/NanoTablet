@@ -1,10 +1,8 @@
 package com.example.spinnertutorial
 
 import android.app.AlertDialog
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.example.spinnertutorial.fragments.SharedViewModel
 

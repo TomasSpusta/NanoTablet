@@ -13,19 +13,19 @@ If you feel you can rename the class as your own like with RestApiManager or Api
 
 class RestApiManager {
 
-    fun CRMRequest(requestModel: CRMReqM, onResult: (CRMResMList?) -> Unit) {
+    fun CRMRequest(requestModel: CRMRequestModel, onResult: (CRMResponseList?) -> Unit) {
 
         val retrofit = CRMServiceBuilder.buildService(ApiInterface::class.java)
-        retrofit.sendCRMReq(requestModel).enqueue(
+        retrofit.sendCRMRequest(requestModel).enqueue(
 
-            object : Callback<CRMResMList> {
+            object : Callback<CRMResponseList> {
 
-                override fun onFailure(call: Call<CRMResMList>, t: Throwable) {
+                override fun onFailure(call: Call<CRMResponseList>, t: Throwable) {
                     onResult(null)
                     println("Problemek CRM onFailure funkce")
                 }
 
-                override fun onResponse(call: Call<CRMResMList>, response: Response<CRMResMList>) {
+                override fun onResponse(call: Call<CRMResponseList>, response: Response<CRMResponseList>) {
                     val cRMResponse = response.body()
                     onResult(cRMResponse)
 
@@ -34,25 +34,24 @@ class RestApiManager {
         )
     }
 
-    fun BookingRequest(requestModel: BookingReqM, onResult: (BookingResM?) -> Unit) {
+    fun BookingRequest(requestModel: BookingRequestModel, onResult: (BookingResponse?) -> Unit) {
         val retrofit = BookingServiceBuilder.buildService(ApiInterface::class.java)
-        retrofit.sendBookingReq(requestModel).enqueue(
+        retrofit.sendBookingRequest(requestModel).enqueue(
 
-            object : Callback<BookingResM> {
+            object : Callback<BookingResponse> {
 
-                override fun onFailure(call: Call<BookingResM>, t: Throwable) {
+                override fun onFailure(call: Call<BookingResponse>, t: Throwable) {
                     onResult(null)
-                    Log.d("_Response",onResult.toString())
-                    println("Problemek Booking onFailure funkce")
+                    Log.d("Booking_Resp_fail", onResult.toString())
+
                 }
 
-                override fun onResponse(call: Call<BookingResM>, response: Response<BookingResM>) {
+                override fun onResponse(call: Call<BookingResponse>, response: Response<BookingResponse>) {
                     val bookingResponse = response.body()
                     onResult(bookingResponse)
 
-
-                    Log.d("_Response","${response.code()}")
-                    Log.d("_Response","${response.body()}")
+                    Log.d("Booking_Resp_code", "${response.code()}")
+                    Log.d("Booking_Resp_body", "${response.body()}")
 
                 }
 

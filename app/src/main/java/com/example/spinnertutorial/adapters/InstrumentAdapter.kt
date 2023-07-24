@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.spinnertutorial.Global.selectedInstrument
-import com.example.spinnertutorial.Global.selectedInstrumentGUID
 import com.example.spinnertutorial.R
 import com.example.spinnertutorial.lists.Instrument
 

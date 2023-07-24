@@ -5,16 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.spinnertutorial.Global.fieldsJSON
 import com.example.spinnertutorial.Global.reservationMap
 import com.example.spinnertutorial.Global.selectedMenuItem
 import com.example.spinnertutorial.MainActivity
-import com.example.spinnertutorial.databinding.GeneralFragBinding
-
 import com.example.spinnertutorial.adapters.GeneralAdapter
+import com.example.spinnertutorial.databinding.GeneralFragBinding
 import com.example.spinnertutorial.reloadInfo
 
 class SubMenuFrag(private val itemList: List<String>) : Fragment() {
@@ -49,6 +48,7 @@ class SubMenuFrag(private val itemList: List<String>) : Fragment() {
             //reservationMap["value"] = it
             //reservationMapMap["value"] = it
             reservationMap["Fields"]!!["$selectedMenuItem value"] = it
+            fieldsJSON.put("$selectedMenuItem value", it)
             if (it == "Other") {
                 Log.i("Resp click", "clicked other")
                 /*
@@ -64,6 +64,7 @@ class SubMenuFrag(private val itemList: List<String>) : Fragment() {
             }
             reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
             Log.i("Resp Res Map", reservationMap.toString())
+            Log.i("Resp Res JSON", reservationMap.toString())
         }
     }
 

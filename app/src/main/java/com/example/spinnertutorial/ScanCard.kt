@@ -1,8 +1,8 @@
 package com.example.spinnertutorial
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -10,10 +10,15 @@ import android.view.View
 import android.webkit.WebView
 import android.widget.EditText
 import android.widget.TextView
-import com.example.spinnertutorial.network.CRMReqM
-
-
+import androidx.appcompat.app.AppCompatActivity
+import com.example.spinnertutorial.Global.fieldsJSON
+import com.example.spinnertutorial.Global.instrumentJSON
+import com.example.spinnertutorial.Global.reservationJSON
+import com.example.spinnertutorial.Global.reservationMap
+import com.example.spinnertutorial.Global.userJSON
+import com.example.spinnertutorial.network.CRMRequestModel
 import com.example.spinnertutorial.network.RestApiManager
+import org.json.JSONObject
 
 
 class ScanCard : AppCompatActivity() {
@@ -27,6 +32,10 @@ class ScanCard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_card)
+
+        reservationJSON.put("User", userJSON)
+        reservationJSON.put("Instrument", instrumentJSON)
+        reservationJSON.put("Fields", fieldsJSON)
 
         val myWeb = findViewById<WebView>(R.id.wv_booking)
         setupWebView(myWeb)
@@ -60,26 +69,38 @@ class ScanCard : AppCompatActivity() {
 
     private fun getUserData(cardID: String) {
         val apiService = RestApiManager()
-        val userInfo = CRMReqM(
-            rfid = cardID
-            //rfid = "1834257108"
+        val userInfo = CRMRequestModel(
+           rfid = cardID
+           // rfid = "1834257108"
         )
         apiService.CRMRequest(userInfo) { it ->
             if (it != null) {
                 if (it.size != 0) {
                     showCardID.text = it[0].userFirstName
                     //Toast.makeText(this, it[0].userFirstName, Toast.LENGTH_SHORT).show()
-                    Log.d("Response_","${it[0].userFirstName}")
+                    Log.d("CRM_Resp","${it[0].userFirstName}")
 
-                    val researchGroup: String? = it[0].primaryRg
+                    reservationMap["User"]!!["ID"] = it[0].userID.toString()
+                    reservationMap["User"]!!["Research group"] = it[0].primaryRg.toString()
+                    reservationMap["User"]!!["Name"] = it[0].userFull_Name.toString()
+
+                    Log.i("CRM_Resp_user", reservationMap.toString())
+
+
+                    userJSON.put("ID",it[0].userID.toString())
+                    userJSON.put("Research group", it[0].primaryRg.toString())
+                    userJSON.put("User name", it[0].userFull_Name.toString())
+
+                    Log.i("CRM_Resp_user_json", reservationJSON.toString())
+                   /* val researchGroup: String? = it[0].primaryRg
                     val userID: String? = it[0].userID
 
-                    val intent = Intent (this, MainActivity::class.java).also {
-                        it.putExtra("EXTRA_RESEARCH_GROUP", researchGroup)
-                        it.putExtra("EXTRA_USER_ID", userID)
+                    */
 
-                    }
+                    val intent = Intent (this, MainActivity::class.java)
                     startActivity(intent)
+
+
 
 
                 }else{

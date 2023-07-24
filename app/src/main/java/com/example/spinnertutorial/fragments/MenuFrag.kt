@@ -5,18 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.spinnertutorial.Global
+import com.example.spinnertutorial.Global.fieldsJSON
 import com.example.spinnertutorial.Global.menuFields
-import com.example.spinnertutorial.Global.subMenuFields
 import com.example.spinnertutorial.Global.reservationMap
 import com.example.spinnertutorial.Global.selectedMenuItem
+import com.example.spinnertutorial.Global.subMenuFields
 import com.example.spinnertutorial.MainActivity
 import com.example.spinnertutorial.adapters.MenuAdapter
-
 import com.example.spinnertutorial.databinding.MenuFragBinding
+import com.example.spinnertutorial.reloadInfo
 import com.example.spinnertutorial.replaceFragment
 
 class MenuFrag : Fragment() {
@@ -34,7 +35,8 @@ class MenuFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val menuList = menuFields//userFieldsNames
+        val menuList = menuFields
+
 
         recyclerView = _binding!!.rvMenu
         recyclerView.setHasFixedSize(true)
@@ -44,18 +46,17 @@ class MenuFrag : Fragment() {
         menuAdapter = MenuAdapter(menuList)
         recyclerView.adapter = menuAdapter
 
+        val menuListSize = menuList.size
+        for (i in 0..<menuListSize) {
+            reservationMap["Fields"]!![("$i name")] = menuFields[i].name
+            reservationMap["Fields"]!![("$i GUID")] = menuFields[i].GUID
+            reservationMap["Fields"]!![("$i value")] = ""
+            //Log.i("Menu, subMenuFields", item.toString())
+        }
+        reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
+
         menuAdapter.onItemClick = {
             replaceAndSave(it, requireActivity() as MainActivity)
-            /* when (it) {
-                    0 -> replaceAndSave(it,requireActivity() as MainActivity)
-                    1 -> replaceAndSave(it,requireActivity() as MainActivity)//replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                    2 -> replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                    3 -> replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                    4 -> replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                    5 -> replaceFragment(SubMenuFrag(fieldsOptions[it]), requireActivity() as MainActivity)
-                }
-
-                */
         }
     }
 
@@ -67,19 +68,20 @@ class MenuFrag : Fragment() {
 
 private fun replaceAndSave(it: Int, activity: MainActivity) {
     if (subMenuFields[it].isEmpty()) {
-        Log.i("Resp other", "other was pressed")
-        reservationMap["Fields"]!![("$selectedMenuItem value")]=""
+
+        //fieldsJSON.get("Fields").put("$selectedMenuItem value","")
+        //reservationMap["Fields"]!![("$selectedMenuItem value")] = ""
         replaceFragment(OtherFrag(), activity)
-    //Log.i("Resp sub menu other", subMenuFields[it].toString())
     } else {
         replaceFragment(SubMenuFrag(subMenuFields[it]), activity)
+
     }
 
     selectedMenuItem = it.toString()
-    //selectedFields[it.toString()] = fieldsOptions[it]
-    //reservationMap["$it value"] = subMenuFields [it]
-    Log.i("Resp res menu map", reservationMap.toString())
-    Log.i("Resp submenu options", subMenuFields[it].toString())
 
+
+    // Log.i("Menu, subMenuFields", subMenuFields[it].toString())
+    //Log.i("Menu, selectedMenuItem", selectedMenuItem.toString())
+    Log.i("${Global.nanoTag} res map", Global.reservationMap.toString())
 }
 

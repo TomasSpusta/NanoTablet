@@ -28,7 +28,6 @@ class MenuAdapter(private val menuList: List<MenuItem>) : RecyclerView.Adapter<M
 
     override fun getItemCount(): Int {
 
-        //Log.d("act", instrumentList.size.toString())
         return menuList.size
     }
 
@@ -42,14 +41,10 @@ class MenuAdapter(private val menuList: List<MenuItem>) : RecyclerView.Adapter<M
             notifyDataSetChanged()
             onItemClick?.invoke(position)
             //reservationMap[position.toString()] = mutableMapOf("name" to item.name,"guid" to item.GUID)
-           reservationMap["Fields"]!!["$position name"] = item.name
+            reservationMap["Fields"]!!["$position name"] = item.name
             reservationMap["Fields"]!!["$position GUID"] = item.GUID
 
-            //reservationMap["$position name"] = item.name
-            //reservationMap["$position GUID"] = item.GUID
-
-
-            Log.i("Resp res map", reservationMap.toString())
+            Log.i("Menu Adapter", reservationMap.toString())
 
         }
         if (selectedItemPosition == position) {

@@ -4,19 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import android.widget.Toast
-
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.spinnertutorial.databinding.GeneralFragBinding
 import com.example.spinnertutorial.databinding.InfoFragBinding
-import com.example.spinnertutorial.adapters.InstrumentAdapter
-import com.example.spinnertutorial.databinding.InstrumentsFragBinding
-import com.example.spinnertutorial.lists.Instrument
-import com.example.spinnertutorial.lists.Lists
 
 class InfoFrag : Fragment() {
 

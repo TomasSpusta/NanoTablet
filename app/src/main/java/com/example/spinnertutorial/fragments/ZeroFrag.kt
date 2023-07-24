@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnertutorial.Global.subMenuFields
-import com.example.spinnertutorial.databinding.GeneralFragBinding
-
 import com.example.spinnertutorial.adapters.GeneralAdapter
+import com.example.spinnertutorial.databinding.GeneralFragBinding
 import com.example.spinnertutorial.otherAlertDialog
 
 class ZeroFrag : Fragment() {

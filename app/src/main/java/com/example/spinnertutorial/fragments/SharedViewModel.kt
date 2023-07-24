@@ -1,9 +1,7 @@
 package com.example.spinnertutorial.fragments
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.spinnertutorial.lists.ResParItem
 
 //https://www.geeksforgeeks.org/fragment-to-fragment-communication-in-android-using-shared-viewmodel/
 

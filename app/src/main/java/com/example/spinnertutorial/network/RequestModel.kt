@@ -2,22 +2,22 @@ package com.example.spinnertutorial.network
 
 import com.google.gson.annotations.SerializedName
 
-class CRMReqM(
+
+// models which I am sending to the APIs
+class CRMRequestModel(
     @SerializedName("rfid") val rfid: String?
 )
 
-class BookingReqM(
+class BookingRequestModel(
     @SerializedName("from") val timeFrom: String?,
     @SerializedName("to") val timeTo: String?,
     @SerializedName("equipment") val equipment: List<String?>,
     @SerializedName("research_group") val researchGroup: String?,
-    @SerializedName("realised_for") val userID: String?,
-    @SerializedName("time_requirement") val timeRequirement: Int?,
     @SerializedName("status_code") val statusCode: Int?,
+    @SerializedName("time_requirement") val timeRequirement: Int?,
+    @SerializedName("realised_for") val userID: String?,
     @SerializedName ("description") val description: String?,
-    @SerializedName ("fields") val fields : Map<String?,Map<String?,String?>>
+    @SerializedName ("fields") val fields: MutableMap<String, MutableMap<String, Any>>
 
     )
-class FieldReqM(
-    @SerializedName("from") val timeFrom: String?,
-)
+

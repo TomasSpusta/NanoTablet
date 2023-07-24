@@ -1,18 +1,12 @@
 package com.example.spinnertutorial.adapters
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.graphics.Color.BLACK
-import android.graphics.Color.RED
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnertutorial.R
-import com.example.spinnertutorial.lists.Instrument
 import com.example.spinnertutorial.lists.OperationItem
 
 class OperationsAdapterAlt( val operationsList: List<OperationItem>) : RecyclerView.Adapter<OperationsAdapterAlt.MyViewHolder>() {
