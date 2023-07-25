@@ -79,7 +79,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/menu_fragment_container"
-            android:name="com.example.spinnertutorial.fragments.MenuFrag"
+            android:name="com.example.nano_rfid.fragments.MenuFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -111,7 +111,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/res_info_fragment_container"
-            android:name="com.example.spinnertutorial.fragments.ResInfoFrag"
+            android:name="com.example.nano_rfid.fragments.ResInfoFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
