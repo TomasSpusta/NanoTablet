@@ -22,18 +22,19 @@ object Global {
     var reservationMap = mutableMapOf(
         "Instrument" to mutableMapOf<String, String>(),
         "Fields" to mutableMapOf<String, String>(),
-        "User" to mutableMapOf<String,String>(),
-       // "Time" to String ()
-    )
+        "User" to mutableMapOf<String, String>(),
 
-    // reservation matrix in JSON
+        )
+
+    // reservation matrix in JSON - not in use
     var userJSON = JSONObject()
     var instrumentJSON = JSONObject()
     var fieldsJSON = JSONObject()
     var reservationJSON = JSONObject()
 
-var nanoTag = "nano"
+    var nanoTag = "nano"
 
+    var infoList = mutableListOf<String>()
 }
 
 

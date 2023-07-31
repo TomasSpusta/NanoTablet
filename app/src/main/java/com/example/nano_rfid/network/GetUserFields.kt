@@ -1,6 +1,6 @@
 package com.example.nano_rfid.network
 
-import android.util.Log
+
 import com.example.nano_rfid.Global.menuFields
 import com.example.nano_rfid.Global.subMenuFields
 import com.example.nano_rfid.lists.MenuItem
@@ -31,6 +31,8 @@ fun GetUserFields(instrumentGUID: String) {
             subMenuFields = mutableListOf()
             menuFields = mutableListOf()
 
+
+
             // loop through keys (fields) - save their GUIDs, names and submenus
             while (fields.hasNext()) {
                 //input field
@@ -59,7 +61,7 @@ fun GetUserFields(instrumentGUID: String) {
             //Log.i("Resp field codes", userFieldsGUIDs.toString())
             //Log.i("Resp field names", userFieldsNames.toString())
             //Log.i("Resp sub menu fields", subMenuFields.toString())
-            Log.i("Resp menu fields", menuFields.toString())
+            //Log.i("Resp menu fields", menuFields.toString())
 
         } catch (e: Exception) {
             e.printStackTrace()

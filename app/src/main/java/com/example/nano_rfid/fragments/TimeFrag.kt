@@ -8,8 +8,9 @@ import androidx.fragment.app.Fragment
 import com.example.nano_rfid.Global.selectedTime
 import com.example.nano_rfid.databinding.TimeFragBinding
 
+// fragment displaying time selection interface
 class TimeFrag : Fragment() {
-    // fragment displaying time selection interface
+
     private var _binding: TimeFragBinding? = null
     private val binding get() = _binding!!
 
@@ -22,11 +23,8 @@ class TimeFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        //if
-
+        binding.tvSetTime.text = selectedTime.toString()
         setTime()
-
 
     }
 
@@ -37,7 +35,6 @@ class TimeFrag : Fragment() {
             selectedTime += 5
             binding.tvSetTime.text = selectedTime.toString()
 
-            //Toast.makeText(activity, selectedTime.toString(), Toast.LENGTH_SHORT).show()
         }
         binding.btnMinus.setOnClickListener {
             if (selectedTime <= 0) {
@@ -46,13 +43,8 @@ class TimeFrag : Fragment() {
                 selectedTime -= 5
             }
             binding.tvSetTime.text = selectedTime.toString()
-
         }
-
-
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

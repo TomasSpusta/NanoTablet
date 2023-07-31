@@ -2,12 +2,6 @@ package com.example.nano_rfid.network
 
 import com.google.gson.annotations.SerializedName
 
-//Tady naprogramujem jaku ocekavam odpoved z API
-
-
-/* Z CRM dorazi takato odpoved
-
- */
 
 data class CRMResponseModel(
     @SerializedName("@odata.etag") val odata: String?,

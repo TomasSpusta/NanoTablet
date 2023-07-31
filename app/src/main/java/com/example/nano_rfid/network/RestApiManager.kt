@@ -54,8 +54,6 @@ class RestApiManager {
                     Log.d("Booking_Resp_body", "${response.body()}")
 
                 }
-
-
             }
         )
     }

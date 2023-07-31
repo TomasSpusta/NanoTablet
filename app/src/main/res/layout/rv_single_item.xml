@@ -21,6 +21,6 @@
         android:text="TextView"
         android:textColor="@color/black"
 
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:textAlignment="center"/>
 </LinearLayout>

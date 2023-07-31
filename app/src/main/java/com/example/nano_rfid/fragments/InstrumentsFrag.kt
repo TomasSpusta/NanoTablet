@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nano_rfid.Global.instrumentJSON
+import com.example.nano_rfid.Global.menuFields
 import com.example.nano_rfid.Global.reservationJSON
 import com.example.nano_rfid.Global.reservationMap
+import com.example.nano_rfid.Global.subMenuFields
 import com.example.nano_rfid.MainActivity
 import com.example.nano_rfid.adapters.InstrumentAdapter
 import com.example.nano_rfid.databinding.GeneralFragBinding
@@ -25,10 +27,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
+//fragment displayed by pressing "Instruments" button
 class InstrumentsFrag : Fragment() {
-
-    //fragment displayed by pressing "Instruments" button
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var instrumentList: List<Instrument>
@@ -60,11 +60,8 @@ class InstrumentsFrag : Fragment() {
 
         instrumentAdapter.onItemClick = {
 
-            instrumentJSON.put("Name",it.name)
-            instrumentJSON.put("GUID",it.GUID)
-
-            //reservationJSON.put("Instrument", instrumentJSON)
-            Log.i("instrument_json", reservationJSON.toString())
+            instrumentJSON.put("Name", it.name)
+            instrumentJSON.put("GUID", it.GUID)
 
             reservationMap["Instrument"]!!["Instrument name"] = it.name
             reservationMap["Instrument"]!!["Instrument GUID"] = it.GUID
@@ -72,14 +69,18 @@ class InstrumentsFrag : Fragment() {
 
 
             GlobalScope.launch(Dispatchers.Default) {
+
                 GetUserFields(it.GUID)
                 //Log.i("Response_button", GlobalVariables.userFields.toString())
+
             }
-            Thread.sleep(1500)
+            Thread.sleep(1000)
+            //Log.i("Menu fields", menuFields.toString())
 
             prepareMenu(MenuFrag(), requireActivity() as MainActivity)
+           // Log.i("Info list instrFrag", reservationMap["Fields"].toString())
+            reservationMap["Fields"]?.clear()
             reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
-
 
 
         }

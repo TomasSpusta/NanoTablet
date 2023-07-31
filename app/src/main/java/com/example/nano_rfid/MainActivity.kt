@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -38,17 +39,18 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(InfoFrag(), this)
 
         // display logged user name and number in left top corner
-        binding.tvUser.text = reservationMap["User"]!!["ID"]
+        binding.tvUser.text = reservationMap["User"]!!["Name"]
 
         // selection of instruments after taping the button
         binding.btnInstruments.setOnClickListener {
             // display instrument fragment
             replaceFragment(InstrumentsFrag(), this)
             // clear variables stored in reservationMap
-            ClearVariables()
+            clearFields()
+            //Log.i("Res map", reservationMap.toString())
             // prepare menu (left fragment) according to the selected instrument
             prepareMenu(MenuFrag(), this)
-            reloadInfo(ResInfoFrag(),this)
+            //reloadInfo(ResInfoFrag(), this)
         }
 
         // make reservation when button is pressed
@@ -59,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 // clear variables and restart application -> display scan card page
         binding.btnLogOff.setOnClickListener {
             // clear variables when user is logged off
-            // ClearVariables()
+            clearVariables()
 
             finish()
             val intent = Intent(this, ScanCard::class.java)

@@ -52,10 +52,13 @@ class MenuFrag : Fragment() {
             reservationMap["Fields"]!![("$i value")] = ""
             //Log.i("Menu, subMenuFields", item.toString())
         }
-        reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
+
+
 
         menuAdapter.onItemClick = {
             replaceAndSave(it, requireActivity() as MainActivity)
+            //Log.i("Info list menufrag", reservationMap["Fields"].toString())
+            reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
         }
     }
 
@@ -80,7 +83,7 @@ private fun replaceAndSave(it: Int, activity: MainActivity) {
 
 
     // Log.i("Menu, subMenuFields", subMenuFields[it].toString())
-    //Log.i("Menu, selectedMenuItem", selectedMenuItem.toString())
-    Log.i("${Global.nanoTag} res map", Global.reservationMap.toString())
+    // Log.i("Menu, selectedMenuItem", selectedMenuItem.toString())
+    // L0og.i("${Global.nanoTag} res map", Global.reservationMap.toString())
 }
 

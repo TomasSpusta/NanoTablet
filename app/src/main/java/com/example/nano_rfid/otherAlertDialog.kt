@@ -4,10 +4,9 @@ import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.widget.EditText
 import androidx.fragment.app.FragmentActivity
-import com.example.nano_rfid.fragments.SharedViewModel
 
 
-fun otherAlertDialog (activity: FragmentActivity, model: SharedViewModel) {
+fun otherAlertDialog (activity: FragmentActivity) {
 
     val builder = AlertDialog.Builder(activity)
     val dialogLayout = LayoutInflater.from(activity).inflate(R.layout.other_layout, null)
@@ -20,8 +19,7 @@ fun otherAlertDialog (activity: FragmentActivity, model: SharedViewModel) {
 
         //Log.d("al dialog","$otherOption in positive button")
 
-        model.storeOther(otherOption)
-        //val storedOtherOption = model.otherInfo.value.toString()
+
 
 
         //Log.d("al dialog","$storedOtherOption in positive button")

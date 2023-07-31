@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nano_rfid.R
 
 // adapter responsible for reservation info - right panel
-class ResInfoAdapter(private val itemList: MutableList<String?>) : RecyclerView.Adapter<ResInfoAdapter.MyViewHolder>() {
+class ResInfoAdapter(private val itemList: MutableList<String>) : RecyclerView.Adapter<ResInfoAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.tv_rv_name)

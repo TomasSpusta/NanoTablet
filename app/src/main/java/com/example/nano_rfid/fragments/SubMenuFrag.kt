@@ -44,24 +44,10 @@ class SubMenuFrag(private val itemList: List<String>) : Fragment() {
         recyclerView.adapter = subMenuAdapter
 
         subMenuAdapter.onItemClick = {
-           // Log.i("Resp click", it)
-            //reservationMap["value"] = it
-            //reservationMapMap["value"] = it
+
             reservationMap["Fields"]!!["$selectedMenuItem value"] = it
             fieldsJSON.put("$selectedMenuItem value", it)
-            if (it == "Other") {
-                Log.i("Resp click", "clicked other")
-                /*
-                 activity?.let { it1 -> otherAlertDialog(it1, model) }
-                 model.otherInfo.observe(viewLifecycleOwner, Observer { data ->
-                     model.storeSize(data)
-                 })
-             } else {
-                 model.storeSize(it)
-             }
-             */
 
-            }
             reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
             Log.i("Resp Res Map", reservationMap.toString())
             Log.i("Resp Res JSON", reservationMap.toString())
