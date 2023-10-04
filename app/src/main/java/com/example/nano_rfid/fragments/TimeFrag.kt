@@ -37,8 +37,8 @@ class TimeFrag : Fragment() {
 
         }
         binding.btnMinus.setOnClickListener {
-            if (selectedTime <= 0) {
-                selectedTime = 0
+            if (selectedTime <= 5) {
+                selectedTime = 5
             } else {
                 selectedTime -= 5
             }

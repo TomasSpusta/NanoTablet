@@ -19,7 +19,7 @@ class GeneralAdapter(private val itemList: List<String>) : RecyclerView.Adapter<
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_single_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_single_item_middle, parent, false)
         return MyViewHolder(view)
     }
 
@@ -43,9 +43,9 @@ class GeneralAdapter(private val itemList: List<String>) : RecyclerView.Adapter<
 
         }
         if (selectedItemPosition == position) {
-            holder.textView.setBackgroundResource(R.drawable.menu_button_selected)
+            holder.textView.setBackgroundResource(R.drawable.submenu_button_selected)
         } else {
-            holder.textView.setBackgroundResource(R.drawable.menu_button)
+            holder.textView.setBackgroundResource(R.drawable.submenu_button)
         }
     }
 }

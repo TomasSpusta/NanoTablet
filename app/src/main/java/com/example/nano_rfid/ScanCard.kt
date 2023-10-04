@@ -37,16 +37,16 @@ class ScanCard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_card)
 
-        reservationJSON.put("User", userJSON)
-        reservationJSON.put("Instrument", instrumentJSON)
-        reservationJSON.put("Fields", fieldsJSON)
+        //  reservationJSON.put("User", userJSON)
+        // reservationJSON.put("Instrument", instrumentJSON)
+        //reservationJSON.put("Fields", fieldsJSON)
 
         val myWeb = findViewById<WebView>(R.id.wv_booking)
-        setupWebView(myWeb)
+        //setupWebView(myWeb)
 
 
         myEditText = findViewById(R.id.et_cardID)
-        //myEditText.showSoftInputOnFocus = false
+        myEditText.showSoftInputOnFocus = false
         myEditText.requestFocus()
 
         // waiting for card scan
@@ -79,12 +79,16 @@ class ScanCard : AppCompatActivity() {
             rfid = cardID
             // rfid = "1834257108"
         )
+
         apiService.CRMRequest(userInfo) { it ->
             if (it != null) {
                 if (it.size != 0) {
+
+                    val intent = Intent(this, MainActivity::class.java)
                     //showCardID.text = it[0].userFirstName
                     //Toast.makeText(this, it[0].userFirstName, Toast.LENGTH_SHORT).show()
-                    Log.d("CRM_Resp", "${it[0].userFirstName}")
+                    Log.i("CRM_Resp_user", reservationMap.toString())
+                    //Log.d("CRM_Resp", "${it[0].userFirstName}")
 
                     reservationMap["User"]!!["ID"] = it[0].userID.toString()
                     reservationMap["User"]!!["Research group"] = it[0].primaryRg.toString()
@@ -93,31 +97,35 @@ class ScanCard : AppCompatActivity() {
                     Log.i("CRM_Resp_user", reservationMap.toString())
 
 
-                    userJSON.put("ID", it[0].userID.toString())
-                    userJSON.put("Research group", it[0].primaryRg.toString())
-                    userJSON.put("User name", it[0].userFull_Name.toString())
+                    //userJSON.put("ID", it[0].userID.toString())
+                    //userJSON.put("Research group", it[0].primaryRg.toString())
+                    //userJSON.put("User name", it[0].userFull_Name.toString())
 
-                    Log.i("CRM_Resp_user_json", reservationJSON.toString())
+                    //Log.i("CRM_Resp_user_json", reservationJSON.toString())
                     /* val researchGroup: String? = it[0].primaryRg
                      val userID: String? = it[0].userID
 
                      */
 
-                    val intent = Intent(this, MainActivity::class.java)
+
                     startActivity(intent)
 
 
                 } else {
                     //showCardID.text = "Problemek s kartou visit user office"
-                    Toast.makeText(this, "Problem s kartou", Toast.LENGTH_SHORT).show()
-                    Log.d("Response_", "Problem s kartou")
+                    Toast.makeText(this, "Please scan card again", Toast.LENGTH_LONG).show()
+                    Log.d("CRM card", "Problem s kartou")
                 }
+            } else {// response from CRM has no body
+                Toast.makeText(this, "Problem s kartou, CRM, or both", Toast.LENGTH_LONG).show()
+                Log.d("Response CRM", "Problem s kartou")
             }
-
         }
     }
-
-
 }
+
+
+
+
 
 

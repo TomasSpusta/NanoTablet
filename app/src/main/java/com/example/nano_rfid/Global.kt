@@ -13,14 +13,14 @@ object Global {
     var subMenuFields = mutableListOf<MutableList<String>>()
 
     // time variable from time frag
-    var selectedTime = 0
+    var selectedTime = 15
 
     //currently selected menu item, used to create proper values fro submenu items
     var selectedMenuItem = String()
 
     // reservation matrix with everything important
     var reservationMap = mutableMapOf(
-        "Instrument" to mutableMapOf<String, String>(),
+        "Instrument" to mutableMapOf<String, String>() ,
         "Fields" to mutableMapOf<String, String>(),
         "User" to mutableMapOf<String, String>(),
 

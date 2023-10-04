@@ -1,5 +1,7 @@
 package com.example.nano_rfid
 
+
+import com.example.nano_rfid.Global.infoList
 import com.example.nano_rfid.Global.menuFields
 import com.example.nano_rfid.Global.reservationMap
 import com.example.nano_rfid.Global.selectedTime
@@ -11,26 +13,22 @@ fun clearVariables() {
     menuFields.clear() // = mutableListOf()
     subMenuFields.clear() // = mutableListOf()
 
-    reservationMap.clear()
 
-    selectedTime = 0
+    reservationMap["Instrument"]?.clear()
+    reservationMap["User"]?.clear()
+    reservationMap["Fields"]?.clear()
+
+    selectedTime = 15
 
 
 }
 
-fun clearFields () {
+fun clearFields() {
     menuFields.clear()
     subMenuFields.clear()
-/*
-    reservationMap = mutableMapOf(
-        "Instrument" to mutableMapOf<String, String>(),
-        "Fields" to mutableMapOf<String, String>(),
-        //"User" to mutableMapOf<String, String>(),
-    )
-
- */
-
+    infoList.clear()
     reservationMap["Instrument"]?.clear()
+    reservationMap["Fields"]?.clear()
 
-    selectedTime = 0
+    selectedTime = 15
 }

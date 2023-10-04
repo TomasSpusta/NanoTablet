@@ -40,6 +40,8 @@ class OtherFrag : Fragment() {
             inputField = binding.etOtherOption.text.toString()
             reservationMap["Fields"]!![("$selectedMenuItem value")] = inputField!!
 
+            
+
             reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
             binding.etOtherOption.onEditorAction(EditorInfo.IME_ACTION_DONE)
             Log.i("Sub menu input", inputField.toString())

@@ -5,7 +5,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.MotionEvent
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +29,11 @@ class MainActivity : AppCompatActivity() {
     //binding of activity_main.xml
     private lateinit var binding: ActivityMainBinding
 
+    // Inactivity
+    // Declaring handler, runnable and time in milli seconds
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable: Runnable
+    private var mTime: Long = 300 * 1000 // time of inactivity in milliseconds => seconds*1000
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -35,8 +43,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Initializing the handler and the runnable
+        mHandler = Handler(Looper.getMainLooper())
+        mRunnable = Runnable {
+
+            Toast.makeText(applicationContext, "User inactive for ${mTime / 60 / 1000} minutes! Logging off.", Toast.LENGTH_LONG).show()
+            logOff()
+
+        }
+
+        // Start the handler
+        startHandler()
+
+
         // Open Info fragment -> Information how to use the app will be showed
-        replaceFragment(InfoFrag(), this)
+        //replaceFragment(InfoFrag(), this) // --> info frag is not necessary
+        replaceFragment(InstrumentsFrag(), this)
 
         // display logged user name and number in left top corner
         binding.tvUser.text = reservationMap["User"]!!["Name"]
@@ -47,31 +69,68 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(InstrumentsFrag(), this)
             // clear variables stored in reservationMap
             clearFields()
+            reloadInfo(ResInfoFrag(), this)
             //Log.i("Res map", reservationMap.toString())
             // prepare menu (left fragment) according to the selected instrument
             prepareMenu(MenuFrag(), this)
-            //reloadInfo(ResInfoFrag(), this)
+
         }
 
         // make reservation when button is pressed
         binding.btnReservation.setOnClickListener {
             makeReservation(this)
+            // display instrument fragment
+            replaceFragment(InstrumentsFrag(), this)
+            clearFields()
+            reloadInfo(ResInfoFrag(), this)
+            prepareMenu(MenuFrag(), this)
         }
 
 // clear variables and restart application -> display scan card page
         binding.btnLogOff.setOnClickListener {
             // clear variables when user is logged off
-            clearVariables()
+            logOff()
 
-            finish()
-            val intent = Intent(this, ScanCard::class.java)
-            startActivity(intent)
-            overridePendingTransition(0, 1)
         }
 
         // show Time fragment -> select time of reservation
         binding.btnTime.setOnClickListener {
             replaceFragment(TimeFrag(), this)
         }
+    }
+
+    // When the screen is touched or motion is detected
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        // Removes the handler callbacks (if any)
+        stopHandler()
+
+        // Runs the handler (for the specified time)
+        // If any touch or motion is detected before
+        // the specified time, this override function is again called
+        startHandler()
+
+        return super.onTouchEvent(event)
+    }
+
+
+    private fun logOff() {
+        clearVariables()
+        finish()
+        val intent = Intent(this, ScanCard::class.java)
+        startActivity(intent)
+        overridePendingTransition(0, 1)
+        Log.i("CRM_Resp_user", reservationMap.toString())
+    }
+
+
+    // start handler function
+    private fun startHandler() {
+        mHandler.postDelayed(mRunnable, mTime)
+    }
+
+    // stop handler function
+    private fun stopHandler() {
+        mHandler.removeCallbacks(mRunnable)
     }
 }

@@ -22,7 +22,7 @@ class RestApiManager {
 
                 override fun onFailure(call: Call<CRMResponseList>, t: Throwable) {
                     onResult(null)
-                    println("Problemek CRM onFailure funkce")
+                    Log.d("CRM_onFailure", "Nepodarilo sa spojit s CRM")
                 }
 
                 override fun onResponse(call: Call<CRMResponseList>, response: Response<CRMResponseList>) {

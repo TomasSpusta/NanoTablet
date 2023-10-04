@@ -22,7 +22,7 @@ class MenuAdapter(private val menuList: List<MenuItem>) : RecyclerView.Adapter<M
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_single_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_single_item_left, parent, false)
         return MyViewHolder(view)
     }
 

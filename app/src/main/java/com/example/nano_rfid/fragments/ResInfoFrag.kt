@@ -1,7 +1,7 @@
 package com.example.nano_rfid.fragments
 
 import android.os.Bundle
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +34,7 @@ class ResInfoFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Log.i("Info list resinfoFrag", reservationMap["Fields"].toString())
+
         infoList = mutableListOf(
             reservationMap["Instrument"]?.get("Instrument name").toString(),
             listItem(0),
@@ -70,5 +70,6 @@ private fun listItem(fieldPosition: Int): String {
     } else {
         infoListItem = ""
     }
+
     return infoListItem
 }

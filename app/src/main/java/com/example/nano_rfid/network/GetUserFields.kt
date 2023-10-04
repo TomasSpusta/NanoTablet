@@ -10,7 +10,8 @@ import org.json.JSONObject
 
 fun GetUserFields(instrumentGUID: String) {
 
-    val URL = "https://booking-beta2.ceitec.cz/api-public/equipment/$instrumentGUID/userfield-definitions"
+    //val URL = "https://booking-beta2.ceitec.cz/api-public/equipment/$instrumentGUID/userfield-definitions"
+    val URL = "https://booking.ceitec.cz/api-public/equipment/$instrumentGUID/userfield-definitions"
 
     if (URL.isNotEmpty()) {
         // create the HTTp client
