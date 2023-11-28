@@ -17,7 +17,7 @@ fun makeReservation(
     context: Context
 
 ) {
-
+    val TAG = "makeRes"
     val timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     val startTime = LocalDateTime.now().format(timeFormat)
     val reservationLengthLong = selectedTime.toLong() // selected time of reservation
@@ -39,18 +39,24 @@ fun makeReservation(
         fields = fieldsMap()
     )
 
-    Log.i("Res_Payload", reservationMap.toString())
+    Log.i("$TAG map", reservationMap.toString())
+
+    try {
 
 
-    apiService.BookingRequest(reservationInfo) {
-        Thread.sleep(250)
-        if (it != null) {
-            Toast.makeText(context, "Reservation created successfully", Toast.LENGTH_LONG).show()
-            Log.d("Suc_Res_Resp", it.reservationGUID.toString())
-        } else {
-            Log.d("Fail_Res_Resp", "Problem s booking response")
-            Toast.makeText(context, "Reservation not created! You probably do not have authorization to create reservation on selected machine", Toast.LENGTH_LONG).show()
+        apiService.BookingRequest(reservationInfo) {
+            Thread.sleep(250)
+            if (it != null) {
+                Toast.makeText(context, "Reservation created successfully", Toast.LENGTH_LONG).show()
+                Log.d("$TAG OK", it.reservationGUID.toString())
+            } else {
+                Log.d("$TAG Fail", "Problem s booking response")
+
+                Toast.makeText(context, "Reservation not created! You probably do not have authorization to create reservation on selected machine", Toast.LENGTH_LONG).show()
+            }
         }
+    }catch (e:Exception){
+        Log.d("$TAG ResE", e.toString())
     }
 }
 
@@ -68,7 +74,7 @@ private fun fieldsMap(): MutableMap<String, MutableMap<String, Any>> {
     val fields = mutableMapOf<String, MutableMap<String, Any>>(instrumentGUID to singleField)
 
     //Log.i("Fields single", singleField.toString())
-    Log.i("Fields map", fields.toString())
+    Log.i("makeRes fields", fields.toString())
 
     return fields
 }

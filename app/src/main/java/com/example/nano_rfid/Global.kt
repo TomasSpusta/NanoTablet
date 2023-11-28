@@ -35,6 +35,10 @@ object Global {
     var nanoTag = "nano"
 
     var infoList = mutableListOf<String>()
+
+
+    var loadedTokenString = String()
+    var loadedTokenExpiration = String()
 }
 
 

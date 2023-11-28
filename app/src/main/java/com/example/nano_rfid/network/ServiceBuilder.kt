@@ -10,18 +10,19 @@ We can set many properties like, converter factory for json parsing,
 base url, http client and many more configurations as required.
 Here is the simplest required form for our tasks.*/
 
-const val bookingURL = "https://booking-beta2.ceitec.cz/"
+const val bookingURL = "https://booking.ceitec.cz/"
 const val CRMURL = "https://crm.api.ceitec.cz/"
-object BookingServiceBuilder {
 
-    private val client = OkHttpClient.Builder().build()
+object BookingServiceBuilder {
+    private val client = OkHttpClient.Builder().apply { addInterceptor(MyInterceptor()) }.build()
+
     private val retrofit = Retrofit.Builder()
         .baseUrl(bookingURL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
 
-    fun <T> buildService(service: Class<T>): T{
+    fun <T> buildService(service: Class<T>): T {
         return retrofit.create(service)
     }
 }
@@ -35,7 +36,7 @@ object CRMServiceBuilder {
         .client(client)
         .build()
 
-    fun <T> buildService(service: Class<T>): T{
+    fun <T> buildService(service: Class<T>): T {
         return retrofit.create(service)
     }
 }

@@ -52,6 +52,10 @@ class RestApiManager {
 
                     Log.d("Booking_Resp_code", "${response.code()}")
                     Log.d("Booking_Resp_body", "${response.body()}")
+                    Log.d("Booking_Resp", "${response.toString()}")
+                    Log.d("Booking_Resp_message", "${response.message()}")
+                    Log.d("Booking_Resp_message", "${response.raw()}")
+
 
                 }
             }

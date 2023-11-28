@@ -11,7 +11,7 @@ fun replaceFragment(
     val fragmentTransaction = activity.supportFragmentManager.beginTransaction()
     fragmentTransaction.replace(R.id.middle_fragment_container, fragment)
     fragmentTransaction.commit()
-    Log.i("${Global.nanoTag} res map", Global.reservationMap.toString())
+    //Log.i("${Global.nanoTag} res map", Global.reservationMap.toString())
 }
 
 // menu fragment - left

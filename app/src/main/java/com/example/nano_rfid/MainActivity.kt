@@ -19,6 +19,12 @@ import com.example.nano_rfid.fragments.InstrumentsFrag
 import com.example.nano_rfid.fragments.MenuFrag
 import com.example.nano_rfid.fragments.ResInfoFrag
 import com.example.nano_rfid.fragments.TimeFrag
+import com.example.nano_rfid.network.GetUserFields
+import com.example.nano_rfid.network.loadToken
+import com.example.nano_rfid.network.verifyToken
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 // Tutorial podla ktereho idem:
@@ -35,16 +41,30 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mRunnable: Runnable
     private var mTime: Long = 300 * 1000 // time of inactivity in milliseconds => seconds*1000
 
+    @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //loadToken(applicationContext)
+        //verify token, if it is valid
+        GlobalScope.launch {
+            Log.i("token", "Checking token")
+            loadToken(applicationContext)
+            verifyToken(applicationContext)
+            Log.i("token", Global.loadedTokenString)
+        }
+
+
+
         //inflate binding of activity_main.xml
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Initializing the handler and the runnable
-        mHandler = Handler(Looper.getMainLooper())
+        //mHandler = Handler(Looper.getMainLooper())
+        /*
         mRunnable = Runnable {
 
             Toast.makeText(applicationContext, "User inactive for ${mTime / 60 / 1000} minutes! Logging off.", Toast.LENGTH_LONG).show()
@@ -52,8 +72,11 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+         */
+
         // Start the handler
-        startHandler()
+        //startHandler()
+
 
 
         // Open Info fragment -> Information how to use the app will be showed

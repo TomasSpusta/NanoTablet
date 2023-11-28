@@ -1,5 +1,6 @@
 package com.example.nano_rfid.network
 
+import com.example.nano_rfid.Global.loadedTokenString
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -17,8 +18,9 @@ interface ApiInterface {
     @POST ("get-contact-by-rfid")
     fun sendCRMRequest (@Body requestModel: CRMRequestModel): Call<CRMResponseList>
 
-    @Headers ("Auth-Token: $token")
-    @POST ("api-public/service-appointment/")
+
+
+    @POST ("api/service-appointment/simple")
     fun sendBookingRequest (@Body requestModel: BookingRequestModel): Call<BookingResponse>
 
 }
