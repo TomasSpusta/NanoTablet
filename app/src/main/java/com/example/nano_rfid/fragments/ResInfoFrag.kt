@@ -43,6 +43,7 @@ class ResInfoFrag : Fragment() {
             listItem(3),
             listItem(4),
             listItem(5),
+            "Project: ${reservationMap["Project"]!!["Project name"].toString()}",
         )
 
 

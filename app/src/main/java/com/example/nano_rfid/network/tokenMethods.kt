@@ -44,6 +44,7 @@ fun loadToken(context: Context) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun verifyToken(context: Context) {
+    Log.i("$TAG verify", "Checking token")
     try {
         //val timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val timeNow = LocalDateTime.now()//.format(timeFormat)

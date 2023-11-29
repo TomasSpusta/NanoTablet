@@ -1,15 +1,14 @@
 package com.example.nano_rfid.network
 
-import android.content.Context
 import android.util.Log
 import com.example.nano_rfid.Global
-import okhttp3.MediaType.Companion.toMediaType
+import com.example.nano_rfid.Global.projects
+import com.example.nano_rfid.lists.ProjectItem
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
-fun getProjects(userID:String) {
+fun getProjects(userID: String) {
 
     val URL = "https://booking.ceitec.cz/api/contact/$userID/projects"
 
@@ -25,17 +24,27 @@ fun getProjects(userID:String) {
         val apiResponse = client.newCall(request).execute()
 
         val apiResponseBody = apiResponse.body?.string()
-        if (apiResponseBody != null) {
 
-            val projects = mutableListOf<String>()
-            val keys = JSONObject (apiResponseBody).keys().asSequence().toList()
-            /*keys.forEach( project ->
-            Log.i("Projects list", keys.toString())
-            )*/
+        try {
+            val json = apiResponseBody?.let { it1 -> JSONObject(it1) }
+            val keys: Iterator<*> = json!!.keys()
+            val projectList = mutableListOf<String>()
 
+            while (keys.hasNext()) {
+                val projectGUID = keys.next() as String
+                //Log.i("Projects name", projectGUID.toString())
+                val projectName: String = json.getJSONObject(projectGUID).get("psa_name").toString()
+                //Log.i("Projects", projectName.toString())
+                projects.add(listProjectItem(projectName, projectGUID))
+            }
+            Log.i("Projects", projects.toString())
 
-            Log.i("Projects list", keys.toString())
-
+        } catch (e: Exception) {
+            Log.i("Projects E", e.toString())
         }
     }
+}
+
+fun listProjectItem(projectName: String, projectGUID: String): ProjectItem {
+    return ProjectItem(projectName, projectGUID)
 }

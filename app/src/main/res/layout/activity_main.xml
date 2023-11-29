@@ -150,6 +150,16 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_projects"
+        style="@style/project_button"
+        android:layout_width="0dp"
+        android:text="Projects"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_time"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+    <Button
         android:id="@+id/btn_time"
         style="@style/menu_button"
         android:layout_width="0dp"

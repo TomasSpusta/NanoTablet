@@ -17,9 +17,11 @@ import com.example.nano_rfid.databinding.ActivityMainBinding
 import com.example.nano_rfid.fragments.InfoFrag
 import com.example.nano_rfid.fragments.InstrumentsFrag
 import com.example.nano_rfid.fragments.MenuFrag
+import com.example.nano_rfid.fragments.ProjectsFrag
 import com.example.nano_rfid.fragments.ResInfoFrag
 import com.example.nano_rfid.fragments.TimeFrag
 import com.example.nano_rfid.network.GetUserFields
+import com.example.nano_rfid.network.getProjects
 import com.example.nano_rfid.network.loadToken
 import com.example.nano_rfid.network.verifyToken
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -47,16 +49,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //loadToken(applicationContext)
+        loadToken(applicationContext)
         //verify token, if it is valid
         GlobalScope.launch {
-            Log.i("token", "Checking token")
-            loadToken(applicationContext)
+            //Log.i("token", "Checking token")
+        //    loadToken(applicationContext)
             verifyToken(applicationContext)
-            Log.i("token", Global.loadedTokenString)
+            //Log.i("token", Global.loadedTokenString)
+            reservationMap["User"]!!["ID"]?.let { getProjects(it) }
         }
-
-
+        Thread.sleep(500)
 
         //inflate binding of activity_main.xml
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -76,7 +78,6 @@ class MainActivity : AppCompatActivity() {
 
         // Start the handler
         //startHandler()
-
 
 
         // Open Info fragment -> Information how to use the app will be showed
@@ -109,6 +110,15 @@ class MainActivity : AppCompatActivity() {
             prepareMenu(MenuFrag(), this)
         }
 
+        binding.btnProjects.setOnClickListener {
+
+            // display projects fragment
+            replaceFragment(ProjectsFrag(), this)
+            // clear variables stored in reservationMap
+            //reloadInfo(ResInfoFrag(), this)
+            //Log.i("Res map", reservationMap.toString())
+
+        }
 // clear variables and restart application -> display scan card page
         binding.btnLogOff.setOnClickListener {
             // clear variables when user is logged off

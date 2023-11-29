@@ -25,10 +25,15 @@ fun makeReservation(
 
     val apiService = RestApiManager()
 
+    if (reservationMap["Project"]!!["Project GUID"] == null){
+        reservationMap["Project"]!!["Project GUID"] = "24e0809a-948e-ee11-80d8-005056914121"
+    }
+
     val reservationInfo = BookingRequestModel(
         timeFrom = startTime,
         timeTo = endTime,
         equipment = listOf(reservationMap["Instrument"]!!["Instrument GUID"].toString()), //listOf("cd4d42a8-3453-e311-85a1-005056991551"),//,
+        project = reservationMap["Project"]!!["Project GUID"].toString(),
         researchGroup = reservationMap["User"]!!["Research group"].toString(),
         //"77b7b68a-7efb-e711-8b1a-005056991551",
         userID = reservationMap["User"]!!["ID"].toString(),
@@ -51,13 +56,14 @@ fun makeReservation(
                 Log.d("$TAG OK", it.reservationGUID.toString())
             } else {
                 Log.d("$TAG Fail", "Problem s booking response")
-
                 Toast.makeText(context, "Reservation not created! You probably do not have authorization to create reservation on selected machine", Toast.LENGTH_LONG).show()
             }
         }
-    }catch (e:Exception){
+    } catch (e: Exception) {
         Log.d("$TAG ResE", e.toString())
     }
+
+
 }
 
 

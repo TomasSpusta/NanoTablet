@@ -17,6 +17,7 @@ fun clearVariables() {
     reservationMap["Instrument"]?.clear()
     reservationMap["User"]?.clear()
     reservationMap["Fields"]?.clear()
+    reservationMap["Project"]?.clear()
 
     selectedTime = 15
 
@@ -29,6 +30,7 @@ fun clearFields() {
     infoList.clear()
     reservationMap["Instrument"]?.clear()
     reservationMap["Fields"]?.clear()
+    reservationMap["Project"]?.clear()
 
     selectedTime = 15
 }

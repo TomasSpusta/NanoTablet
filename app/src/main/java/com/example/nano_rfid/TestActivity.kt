@@ -28,7 +28,9 @@ class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
+
         reservationMap["User"]!!["ID"] = "2c5c963c-68ba-e311-85a1-005056991551"
+        val tomID = "2c5c963c-68ba-e311-85a1-005056991551"
         loadToken(applicationContext)
         //risa guid (z bookingu): 64a015fd-f536-e611-9f54-005056991551 <-- Toto je normal user ID
         val risaID = "64a015fd-f536-e611-9f54-005056991551"
@@ -44,11 +46,12 @@ class TestActivity : AppCompatActivity() {
 
 
         GlobalScope.launch {
-
+            loadToken(applicationContext)
             verifyToken(applicationContext)
-            Log.i("token", loadedTokenString)
+            //Log.i("token", loadedTokenString)
             //GetUserFields("cd4d42a8-3453-e311-85a1-005056991551")
-            getProjects(risaID)
+
+
         }
 
 

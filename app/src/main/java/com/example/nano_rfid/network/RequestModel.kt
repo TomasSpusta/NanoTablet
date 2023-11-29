@@ -1,5 +1,6 @@
 package com.example.nano_rfid.network
 
+import com.example.nano_rfid.Global
 import com.google.gson.annotations.SerializedName
 
 
@@ -12,6 +13,7 @@ class BookingRequestModel(
     @SerializedName("from") val timeFrom: String?,
     @SerializedName("to") val timeTo: String?,
     @SerializedName("equipment") val equipment: List<String?>,
+    @SerializedName("project") val project: String?,
     @SerializedName("research_group") val researchGroup: String?,
     @SerializedName("status_code") val statusCode: Int?,
     @SerializedName("time_requirement") val timeRequirement: Int?,

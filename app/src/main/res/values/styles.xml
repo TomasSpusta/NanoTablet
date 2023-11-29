@@ -27,6 +27,15 @@
         <item name="android:textSize">25sp</item>
     </style>
 
+    <style name="project_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/project_button</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:padding">25dp</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
     <style name="reservation_button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
