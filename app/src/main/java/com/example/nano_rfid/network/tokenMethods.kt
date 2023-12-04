@@ -120,6 +120,19 @@ fun saveToken(context: Context, tokenFlow: String) {
     }
 }
 
+fun clearToken (context: Context) {
+    try {
+        val tokenFlow = "$loadedTokenExpiration\nx"
+        context.openFileOutput(tokenFileName, MODE_PRIVATE).use { output ->
+            output.write(tokenFlow.toByteArray())
+        }
+        Log.i("clearToken", "Token cleared")
+    } catch (e: Exception) {
+        Log.i("clearToken error", e.toString())
+    }
+
+}
+
 
 
 

@@ -19,7 +19,7 @@ fun makeReservation(
 ) {
     val TAG = "makeRes"
     val timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-    val startTime = LocalDateTime.now().format(timeFormat)
+    val startTime = LocalDateTime.now().plusMinutes(1).format(timeFormat)
     val reservationLengthLong = selectedTime.toLong() // selected time of reservation
     val endTime = reservationLengthLong.let { LocalDateTime.now().plusMinutes(it).format(timeFormat) }
 

@@ -21,6 +21,7 @@ import com.example.nano_rfid.fragments.ProjectsFrag
 import com.example.nano_rfid.fragments.ResInfoFrag
 import com.example.nano_rfid.fragments.TimeFrag
 import com.example.nano_rfid.network.GetUserFields
+import com.example.nano_rfid.network.getNewToken
 import com.example.nano_rfid.network.getProjects
 import com.example.nano_rfid.network.loadToken
 import com.example.nano_rfid.network.verifyToken
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     // Declaring handler, runnable and time in milli seconds
     private lateinit var mHandler: Handler
     private lateinit var mRunnable: Runnable
-    private var mTime: Long = 300 * 1000 // time of inactivity in milliseconds => seconds*1000
+    private var mTime: Long = 180 * 1000 // time of inactivity in milliseconds => seconds*1000
 
     @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("SetTextI18n")
@@ -49,11 +50,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        loadToken(applicationContext)
+        //loadToken(applicationContext)
         //verify token, if it is valid
         GlobalScope.launch {
             //Log.i("token", "Checking token")
-        //    loadToken(applicationContext)
+            getNewToken(applicationContext)
+            loadToken(applicationContext)
             verifyToken(applicationContext)
             //Log.i("token", Global.loadedTokenString)
             reservationMap["User"]!!["ID"]?.let { getProjects(it) }
@@ -64,20 +66,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initializing the handler and the runnable
-        //mHandler = Handler(Looper.getMainLooper())
-        /*
-        mRunnable = Runnable {
 
-            Toast.makeText(applicationContext, "User inactive for ${mTime / 60 / 1000} minutes! Logging off.", Toast.LENGTH_LONG).show()
-            logOff()
+        GlobalScope.launch {
 
+            // Initializing the handler and the runnable
+            mHandler = Handler(Looper.getMainLooper())
+            mRunnable = Runnable {
+
+                Toast.makeText(applicationContext, "User inactive for ${mTime / 60 / 1000} minutes! Logging off.", Toast.LENGTH_LONG).show()
+                Log.i("LogOff", "${mTime / 60 / 1000} minutes - time out occured")
+                logOff()
+
+            }
+            // Start the handler
+            startHandler()
         }
 
-         */
 
-        // Start the handler
-        //startHandler()
+
+
+
+
+
 
 
         // Open Info fragment -> Information how to use the app will be showed
@@ -142,7 +152,7 @@ class MainActivity : AppCompatActivity() {
         // If any touch or motion is detected before
         // the specified time, this override function is again called
         startHandler()
-
+        Log.i("LogOff", "Touch event")
         return super.onTouchEvent(event)
     }
 
@@ -160,10 +170,12 @@ class MainActivity : AppCompatActivity() {
     // start handler function
     private fun startHandler() {
         mHandler.postDelayed(mRunnable, mTime)
+        Log.i("LogOff", "Handler Started")
     }
 
     // stop handler function
     private fun stopHandler() {
         mHandler.removeCallbacks(mRunnable)
+        Log.i("LogOff", "Handler Stopped")
     }
 }
