@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace 'com.example.spinnertutorial'
-    compileSdk 33
+    namespace 'com.example.nano_rfid'
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.spinnertutorial"
+        applicationId "com.example.nano_rfid"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -39,10 +39,12 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-ktx:+'
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -56,5 +58,13 @@ dependencies {
 
     //web view
     // implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+
+    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
 
 }

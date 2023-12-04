@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--LinearLayout orientation horizontal -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/llMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    >
+
+
+    <TextView
+        android:id="@+id/tv_rv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        style="@style/menu_button"
+        android:text="TextView"
+        android:textColor="@color/black"
+
+        android:layout_margin="5dp"
+        android:textAlignment="center"/>
+</LinearLayout>
