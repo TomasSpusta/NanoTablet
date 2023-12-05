@@ -30,7 +30,7 @@ fun clearFields() {
     infoList.clear()
     reservationMap["Instrument"]?.clear()
     reservationMap["Fields"]?.clear()
-    reservationMap["Project"]?.clear()
+  //  reservationMap["Project"]?.clear()
 
     selectedTime = 15
 }

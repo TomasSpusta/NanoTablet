@@ -26,6 +26,7 @@ import com.example.nano_rfid.network.getProjects
 import com.example.nano_rfid.network.loadToken
 import com.example.nano_rfid.network.verifyToken
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     // Declaring handler, runnable and time in milli seconds
     private lateinit var mHandler: Handler
     private lateinit var mRunnable: Runnable
-    private var mTime: Long = 180 * 1000 // time of inactivity in milliseconds => seconds*1000
+    private var mTime: Long = 300 * 1000 // time of inactivity in milliseconds => seconds*1000
 
     @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("SetTextI18n")
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         //loadToken(applicationContext)
         //verify token, if it is valid
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.IO) {
             //Log.i("token", "Checking token")
             getNewToken(applicationContext)
             loadToken(applicationContext)
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Default) {
 
             // Initializing the handler and the runnable
             mHandler = Handler(Looper.getMainLooper())
@@ -81,13 +82,7 @@ class MainActivity : AppCompatActivity() {
             // Start the handler
             startHandler()
         }
-
-
-
-
-
-
-
+        Thread.sleep(500)
 
 
         // Open Info fragment -> Information how to use the app will be showed

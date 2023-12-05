@@ -23,9 +23,11 @@ import com.example.nano_rfid.lists.Lists
 import com.example.nano_rfid.network.GetUserFields
 import com.example.nano_rfid.prepareMenu
 import com.example.nano_rfid.reloadInfo
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 //fragment displayed by pressing "Instruments" button
 class InstrumentsFrag : Fragment() {
@@ -44,6 +46,7 @@ class InstrumentsFrag : Fragment() {
         return binding.root
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,13 +75,15 @@ class InstrumentsFrag : Fragment() {
 
                 GetUserFields(it.GUID)
                 //Log.i("Response_button", GlobalVariables.userFields.toString())
-
+                withContext(Dispatchers.Main) {
+                    prepareMenu(MenuFrag(), requireActivity() as MainActivity)
+                }
             }
-            Thread.sleep(1000)
+            Thread.sleep(100)
             //Log.i("Menu fields", menuFields.toString())
 
-            prepareMenu(MenuFrag(), requireActivity() as MainActivity)
-           // Log.i("Info list instrFrag", reservationMap["Fields"].toString())
+
+            // Log.i("Info list instrFrag", reservationMap["Fields"].toString())
             reservationMap["Fields"]?.clear()
             reloadInfo(ResInfoFrag(), requireActivity() as MainActivity)
 

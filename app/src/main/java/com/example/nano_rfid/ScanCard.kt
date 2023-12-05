@@ -41,10 +41,13 @@ class ScanCard : AppCompatActivity() {
         // reservationJSON.put("Instrument", instrumentJSON)
         //reservationJSON.put("Fields", fieldsJSON)
 
+
+        val version = findViewById<TextView>(R.id.tv_version)
+
+        version.text = "Version: 5.12.2023"
+
         val myWeb = findViewById<WebView>(R.id.wv_booking)
         //setupWebView(myWeb)
-
-
         myEditText = findViewById(R.id.et_cardID)
         myEditText.showSoftInputOnFocus = false
         myEditText.requestFocus()
